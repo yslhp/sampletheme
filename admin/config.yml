@@ -1,0 +1,2130 @@
+backend:
+  name: git-gateway
+  accept_roles:
+    - admin
+    - editor
+  branch: master
+media_folder: theme/assets/images
+public_folder: /assets/images
+collections:
+  - name: pages
+    label: Pages
+    identifier_field: title
+    extension: md
+    create: false
+    delete: false
+    slug: '{{slug}}'
+    editor: &ref_0
+      preview: false
+    folder: cms/pages
+    fields: &ref_1
+      - label: Title
+        name: title
+        widget: string
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '{{slug}}.html'
+      - &ref_2
+        label: Seo
+        name: seo
+        widget: object
+        collapsed: true
+        fields:
+          - label: Title
+            name: title
+            widget: string
+            required: false
+          - label: Description
+            name: description
+            widget: string
+            required: false
+          - label: No index
+            name: noindex
+            widget: boolean
+            default: false
+            required: false
+          - label: Open Graph Title
+            name: og:title
+            widget: string
+            required: false
+          - label: Open Graph Image
+            name: og:image
+            widget: image
+            required: false
+            media_library:
+              config:
+                multiple: false
+          - label: Twitter Title
+            name: twitter:title
+            widget: string
+            default: summary
+            required: false
+          - label: Twitter Card
+            name: twitter:card
+            widget: string
+            default: summary
+            required: false
+          - label: Twitter Site
+            name: twitter:site
+            widget: string
+            required: false
+          - label: Twitter Creator
+            name: twitter:creator
+            widget: string
+            required: false
+          - label: Twitter Image
+            name: twitter:image
+            widget: image
+            required: false
+            media_library:
+              config:
+                multiple: false
+          - label: Additional HTML tags
+            name: additional_tags
+            widget: text
+            required: false
+  - name: pages-style-guide
+    label: Pages style-guide
+    identifier_field: title
+    extension: md
+    create: false
+    delete: false
+    slug: '{{slug}}'
+    editor: *ref_0
+    folder: cms/pages/style-guide
+    fields: *ref_1
+  - name: pages-produtos
+    label: Pages produtos
+    identifier_field: title
+    extension: md
+    create: false
+    delete: false
+    slug: '{{slug}}'
+    editor: *ref_0
+    folder: cms/pages/produtos
+    fields: *ref_1
+  - name: category
+    label: Categories
+    folder: cms/category
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: category
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[category].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_2
+  - name: product
+    label: Products
+    folder: cms/product
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: variation-properties
+        label: Variation Properties
+        widget: list
+        required: false
+        summary: '{{name}}'
+        fields:
+          - hint: ''
+            name: slug
+            label: Slug
+            widget: hidden
+            required: true
+          - hint: ''
+            name: name
+            label: Name
+            widget: string
+            required: true
+          - hint: ''
+            name: values
+            label: Values
+            widget: list
+            required: true
+            summary: '{{name}}'
+            fields:
+              - hint: ''
+                name: slug
+                label: Slug
+                widget: hidden
+                required: true
+              - hint: ''
+                name: name
+                label: Name
+                widget: string
+                required: true
+      - hint: ''
+        name: variations
+        label: Variations
+        widget: list
+        required: true
+        summary: '{{title}}'
+        min: 1
+        fields:
+          - hint: Slug of the variation
+            name: slug
+            label: Slug
+            widget: string
+            required: true
+          - hint: Default variation?
+            name: default
+            label: Default
+            widget: boolean
+            required: true
+          - hint: ''
+            name: variation-properties
+            label: SKU Values
+            widget: prop-values
+            required: false
+          - hint: ''
+            name: title
+            label: Name
+            widget: string
+            required: true
+          - hint: ''
+            name: f_main-image
+            label: Main Image
+            widget: object
+            required: false
+            fields:
+              - hint: ''
+                name: url
+                label: Image
+                widget: image
+                required: false
+                allow_multiple: false
+              - hint: Image Alt
+                name: alt
+                label: alt
+                widget: string
+                required: false
+          - hint: ''
+            name: f_more-images
+            label: More Images
+            widget: list
+            required: false
+            fields:
+              - hint: ''
+                name: url
+                label: Image
+                widget: image
+                required: false
+                allow_multiple: false
+              - hint: Image Alt
+                name: alt
+                label: alt
+                widget: string
+                required: false
+          - hint: ''
+            name: f_price
+            label: Price
+            widget: price
+            required: true
+          - hint: Compare at Price must be higher than price
+            name: f_compare-at-price
+            label: Compare at price
+            widget: price
+            required: false
+          - hint: ''
+            name: f_download-files
+            label: Downloads
+            widget: list
+            required: false
+            fields:
+              - hint: ''
+                name: url
+                label: Image
+                widget: image
+                required: false
+                allow_multiple: false
+              - hint: Image Alt
+                name: alt
+                label: alt
+                widget: string
+                required: false
+          - hint: ''
+            name: f_width
+            label: Width
+            widget: number
+            required: false
+          - hint: ''
+            name: f_length
+            label: Length
+            widget: number
+            required: false
+          - hint: ''
+            name: f_height
+            label: Height
+            widget: number
+            required: false
+          - hint: ''
+            name: f_weight
+            label: Weight
+            widget: number
+            required: false
+          - hint: ''
+            name: f_sku
+            label: SKU
+            widget: string
+            required: false
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - hint: Add this product to one or more categories.
+        name: f_category
+        label: Categories
+        widget: relation
+        required: false
+        collection: category
+        value_field: cms/category/{{slug}}.md
+        search_fields:
+          - slug
+          - name
+        display_fields:
+          - title
+        multiple: true
+      - hint: ''
+        name: f_description
+        label: Description
+        widget: string
+        required: false
+      - hint: ''
+        name: f_shippable
+        label: Requires Shipping
+        widget: boolean
+        required: false
+        default: false
+      - hint: ''
+        name: f_ec-product-type
+        label: Product type
+        widget: select
+        required: false
+        options:
+          - label: Physical
+            value: Physical
+          - label: Digital
+            value: Digital
+          - label: Service
+            value: Service
+          - label: Membership
+            value: Membership
+          - label: Advanced
+            value: Advanced
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: product
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[product].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_2
+  - label: Theme Settings
+    name: settings
+    identifier_field: title
+    extension: json
+    create: false
+    delete: false
+    slug: '{{slug}}'
+    editor:
+      preview: false
+    files:
+      - label: General
+        name: site
+        file: cms/_data/settings/site.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: General
+          - hint: Full domain url (needed for a correct sitemap file)
+            name: domain
+            label: Domain
+            widget: string
+            required: false
+          - name: favicon
+            label: Favicon
+            widget: image
+            allow_multiple: false
+            required: false
+          - name: apple_touch_icon
+            label: Apple Touch Icon
+            widget: image
+            allow_multiple: false
+            required: false
+          - name: header_additional_content
+            label: Additional Content Header
+            hint: Content here will be placed before </head> tag
+            widget: text
+            required: false
+          - name: footer_additional_content
+            label: Additional Content Footer
+            hint: Content here will be placed before </body> tag
+            widget: text
+            required: false
+          - name: images_optimization
+            label: Images Optimization
+            widget: object
+            collapsed: false
+            fields:
+              - label: Image Formats
+                name: formats
+                widget: select
+                multiple: true
+                options:
+                  - label: Avif
+                    value: avif
+                  - label: Webp
+                    value: webp
+              - label: Image Dimensions
+                name: dimensions
+                widget: select
+                multiple: true
+                options:
+                  - label: '500'
+                    value: 500
+                  - label: '800'
+                    value: 800
+                  - label: '1080'
+                    value: 1080
+                  - label: '1600'
+                    value: 1600
+                  - label: '2000'
+                    value: 2000
+                  - label: '2600'
+                    value: 2600
+      - label: Colors
+        name: colors
+        file: cms/_data/colors.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Colors
+      - label: Texts
+        name: texts
+        file: cms/_data/texts.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Texts
+          - hint: 'Original text: Shop by Category, key: -18320f43'
+            label: Text
+            name: '-18320f43'
+            widget: string
+          - hint: 'Original text: Gaming Headsets, key: -3baf44fe'
+            label: Text
+            name: '-3baf44fe'
+            widget: string
+          - hint: 'Original text: Recovery, key: -2bc71c4b'
+            label: Text
+            name: '-2bc71c4b'
+            widget: string
+          - hint: 'Original text: Booster, key: 67176b70'
+            label: Text
+            name: 67176b70
+            widget: string
+          - hint: 'Original text: Sale, key: 273467'
+            label: Text
+            name: '273467'
+            widget: string
+          - hint: 'Original text: Gamer Bundle, key: 65830e22'
+            label: Text
+            name: '65830e22'
+            widget: string
+          - hint: 'Original text: HX3D, key: 220b81'
+            label: Text
+            name: 220b81
+            widget: string
+          - hint: 'Original text: NGENUITY, key: -335898c5'
+            label: Text
+            name: '-335898c5'
+            widget: string
+          - hint: 'Original text: Produtos, key: -37f98b46'
+            label: Text
+            name: '-37f98b46'
+            widget: string
+          - hint: 'Original text: Ingredientes, key: -25575da1'
+            label: Text
+            name: '-25575da1'
+            widget: string
+          - hint: 'Original text: Bundles, key: 713f7811'
+            label: Text
+            name: 713f7811
+            widget: string
+          - hint: 'Original text: Sobre Nos, key: 251c9c2b'
+            label: Text
+            name: 251c9c2b
+            widget: string
+          - hint: 'Original text: 🍂 Limited Time Fall Sale, key: 1a096299'
+            label: Text
+            name: 1a096299
+            widget: string
+          - hint: 'Original text: Recovery , key: -4d1c6cf5'
+            label: Text
+            name: '-4d1c6cf5'
+            widget: string
+          - hint: 'Original text: Health, key: -7f661184'
+            label: Text
+            name: '-7f661184'
+            widget: string
+          - hint: 'Original text: Frequently Asked Questions, key: -475b7d60'
+            label: Text
+            name: '-475b7d60'
+            widget: string
+          - hint: 'Original text: Minha Conta, key: 2986e59a'
+            label: Text
+            name: 2986e59a
+            widget: string
+          - hint: 'Original text: Entre em Contato, key: -48b0744c'
+            label: Text
+            name: '-48b0744c'
+            widget: string
+          - hint: 'Original text: Welcome to , key: 63190f27'
+            label: Text
+            name: 63190f27
+            widget: string
+          - hint: 'Original text: the Next Level, key: -4a5f84da'
+            label: Text
+            name: '-4a5f84da'
+            widget: string
+          - hint: >-
+              Original text: The HyperX Pulsefire Haste 2 Pro 4K delivers
+              next-level gaming performance as our first mouse with a true 4K
+              polling rate., key: 68bb0f2e
+            label: Text
+            name: 68bb0f2e
+            widget: text
+          - hint: 'Original text: LEARN MORE, key: 552c03d1'
+            label: Text
+            name: 552c03d1
+            widget: string
+          - hint: 'Original text: Sem corantes, key: -535ea6ac'
+            label: Text
+            name: '-535ea6ac'
+            widget: string
+          - hint: 'Original text: Sem alérgenos, key: 3afc05fb'
+            label: Text
+            name: 3afc05fb
+            widget: string
+          - hint: 'Original text: Sem contaminantes, key: -41808cf3'
+            label: Text
+            name: '-41808cf3'
+            widget: string
+          - hint: 'Original text: Sem glúten, key: 409f72cd'
+            label: Text
+            name: 409f72cd
+            widget: string
+          - hint: 'Original text: Vegano, key: -677fa896'
+            label: Text
+            name: '-677fa896'
+            widget: string
+          - hint: 'Original text: GMO texto, key: -1210f9d5'
+            label: Text
+            name: '-1210f9d5'
+            widget: string
+          - hint: 'Original text: Para os curiosos., key: -f2f113f'
+            label: Text
+            name: '-f2f113f'
+            widget: string
+          - hint: >-
+              Original text: Lorem ipsum dolor sir amet hahaha super
+              interessante, key: 6783921
+            label: Text
+            name: '6783921'
+            widget: string
+          - hint: 'Original text: Como tomar?, key: 788154ce'
+            label: Text
+            name: 788154ce
+            widget: string
+          - hint: >-
+              Original text: A recomendação é tomar 2 cápsulas por dia. Não
+              ultrapassando a dose de 4 cápsulas diárias. , key: 341d2ea8
+            label: Text
+            name: 341d2ea8
+            widget: text
+          - hint: 'Original text: Preciso tomar em jejum?, key: 7e496378'
+            label: Text
+            name: '7e496378'
+            widget: string
+          - hint: >-
+              Original text: Não é necessário estar em jejum para tomar., key:
+              -3edcc46a
+            label: Text
+            name: '-3edcc46a'
+            widget: string
+          - hint: 'Original text: Tem algum efeito colateral?, key: 7e45f5a4'
+            label: Text
+            name: 7e45f5a4
+            widget: string
+          - hint: >-
+              Original text: Não há efeitos colaterais negativos ao tomar nosso
+              suplemento. Ele é um Suplemento Alimentar Cerebral com nutrientes
+              que podem ser encontrados em alimentos. Foi testado em
+              laboratório, com ingredientes da mais alta qualidade que foram
+              cuidadosamente pesquisados por profissionais da área ​​para ajudar
+              a melhorar sua saúde e performance mental., key: -53ddeb30
+            label: Text
+            name: '-53ddeb30'
+            widget: text
+          - hint: >-
+              Original text: Quanto tempo para ver os resultados com o nüm?,
+              key: 35b91034
+            label: Text
+            name: 35b91034
+            widget: string
+          - hint: >-
+              Original text: O resultado varia de acordo com o seu estilo de
+              vida. Nosso suplemento não é uma pílula mágica ou remédio. É um
+              suplemento alimentar que visa suprir as necessidades nutricionais
+              do seu cérebro. Se você já segue o estilo de vida #Braincare em
+              pelo menos 60 dias você já consegue sentir todos os benefícios de
+              um cérebro bem cuidado., key: 62eb4aa
+            label: Text
+            name: 62eb4aa
+            widget: text
+          - hint: >-
+              Original text: Posso tomar junto com outros suplementos?, key:
+              -5a5dbc00
+            label: Text
+            name: '-5a5dbc00'
+            widget: string
+          - hint: >-
+              Original text: Sim, você pode tomar com outros suplementos. Isso
+              inclui creatina e shakes de proteína., key: 79fa5226
+            label: Text
+            name: 79fa5226
+            widget: string
+          - hint: 'Original text: Qual o melhor horário para tomar?, key: -35707029'
+            label: Text
+            name: '-35707029'
+            widget: string
+          - hint: >-
+              Original text: O consumo pode ser em qualquer horário durante o
+              dia. Somente não recomendamos após as 16:00 da tarde por conter
+              cafeína na fórmula e o que pode interferir no seu sono., key:
+              -53f2d898
+            label: Text
+            name: '-53f2d898'
+            widget: text
+          - hint: 'Original text: Como ele funciona dentro do cérebro?, key: 1420d0e1'
+            label: Text
+            name: 1420d0e1
+            widget: string
+          - hint: >-
+              Original text: O nosso suplemento tem em sua composição
+              substâncias naturais, não-tóxicas, que agem diretamente no seu
+              sistema nervoso central e, com isso, estimulam seus
+              neurotransmissores., key: -66030104
+            label: Text
+            name: '-66030104'
+            widget: text
+          - hint: >-
+              Original text: Essas substâncias atuam como mensageiros químicos,
+              transportando, estimulando e equilibrando os sinais dos neurônios,
+              células nervosas e outras células do corpo., key: -4639f67
+            label: Text
+            name: '-4639f67'
+            widget: text
+          - hint: >-
+              Original text: Assim, trabalham para acelerar o seu raciocínio,
+              aumentar a sua capacidade de concentração, diminuir sua fadiga
+              mental e potencializar a sua memória., key: -38c90996
+            label: Text
+            name: '-38c90996'
+            widget: text
+          - hint: 'Original text: Qualquer um pode tomar?, key: -4ecfe82c'
+            label: Text
+            name: '-4ecfe82c'
+            widget: string
+          - hint: >-
+              Original text: Para gestantes, lactantes e pessoas que fazem uso
+              de outros medicamentos, como antidepressivos ou ansiolíticos,
+              recomendamos prévia orientação médica. Os demais, que não se
+              enquadram nessas exceções, podem consumir diariamente 2 cápsulas
+              do nosso suplemento para apoiar o desempenho mental e a cognição.,
+              key: 4fa6515
+            label: Text
+            name: 4fa6515
+            widget: text
+          - hint: >-
+              Original text: Contém calorias, açúcares ou carboidratos?, key:
+              4e70c262
+            label: Text
+            name: 4e70c262
+            widget: string
+          - hint: >-
+              Original text: Não. Nós usamos uma mistura de ingredientes veganos
+              com ZERO açúcares, carboidratos ou calorias!, key: -76d9d10e
+            label: Text
+            name: '-76d9d10e'
+            widget: text
+          - hint: 'Original text: Esse site é seguro?, key: -5ae49a6e'
+            label: Text
+            name: '-5ae49a6e'
+            widget: string
+          - hint: >-
+              Original text: Sim. Nosso site é totalmente certificado, usando os
+              mais recentes padrões de segurança., key: -6c07e28c
+            label: Text
+            name: '-6c07e28c'
+            widget: string
+          - hint: 'Original text: NUM, key: 12f66'
+            label: Text
+            name: 12f66
+            widget: string
+          - hint: 'Original text: Comprar, key: -641fed6c'
+            label: Text
+            name: '-641fed6c'
+            widget: string
+          - hint: 'Original text: Ajuda, key: 3c5eac9'
+            label: Text
+            name: 3c5eac9
+            widget: string
+          - hint: 'Original text: CONTATO, key: 6382b20a'
+            label: Text
+            name: 6382b20a
+            widget: string
+          - hint: 'Original text: E-Mail, key: 785cfe5f'
+            label: Text
+            name: 785cfe5f
+            widget: string
+          - hint: 'Original text: Whatsapp, key: 772ccdb2'
+            label: Text
+            name: 772ccdb2
+            widget: string
+          - hint: 'Original text: © 2023 NUM. All right reserved., key: -1d40036b'
+            label: Text
+            name: '-1d40036b'
+            widget: string
+          - hint: 'Original text: Política de Privacidade, key: 1f851c4'
+            label: Text
+            name: 1f851c4
+            widget: string
+          - hint: 'Original text: Termos de Uso, key: -21f06bfe'
+            label: Text
+            name: '-21f06bfe'
+            widget: string
+          - hint: 'Original text: Protected Page, key: -11d4bbff'
+            label: Text
+            name: '-11d4bbff'
+            widget: string
+          - hint: >-
+              Original text: Incorrect password. Please try again., key:
+              -f5c4b5f
+            label: Text
+            name: '-f5c4b5f'
+            widget: string
+          - hint: 'Original text: Page Not Found, key: -40b0787c'
+            label: Text
+            name: '-40b0787c'
+            widget: string
+          - hint: >-
+              Original text: The page you are looking for doesn't exist or has
+              been moved, key: 556d64d8
+            label: Text
+            name: 556d64d8
+            widget: string
+          - hint: 'Original text: ⚡️, key: 5ab8e'
+            label: Text
+            name: 5ab8e
+            widget: string
+          - hint: 'Original text: BUILD YOUR BUNDLE, key: 68e44a3d'
+            label: Text
+            name: 68e44a3d
+            widget: string
+          - hint: 'Original text: 🧋, key: 1b0d4d'
+            label: Text
+            name: 1b0d4d
+            widget: string
+          - hint: 'Original text: COFFEE CONCENTRATES, key: 6690f7d'
+            label: Text
+            name: 6690f7d
+            widget: string
+          - hint: 'Original text: RECIPES, key: 6b4fe885'
+            label: Text
+            name: 6b4fe885
+            widget: string
+          - hint: 'Original text: 💸, key: 1b0c1b'
+            label: Text
+            name: 1b0c1b
+            widget: string
+          - hint: 'Original text: AFFILIATE PROGRAM, key: 24ec5e71'
+            label: Text
+            name: 24ec5e71
+            widget: string
+          - hint: 'Original text: 📧, key: 1b0c4a'
+            label: Text
+            name: 1b0c4a
+            widget: string
+          - hint: 'Original text: SUPPORT, key: -43c1f451'
+            label: Text
+            name: '-43c1f451'
+            widget: string
+          - hint: 'Original text: Mais de 1,319 clientes satisfeitos, key: 12cbebf4'
+            label: Text
+            name: 12cbebf4
+            widget: string
+          - hint: >-
+              Original text: Um bom dia começa com uma boa noite de sono. Depois
+              de um dia intenso, está na hora de desacelerar e regenerar., key:
+              -2a05fc7a
+            label: Text
+            name: '-2a05fc7a'
+            widget: text
+          - hint: "Original text: Melhora no foco e \_concentração, key: -60801863"
+            label: Text
+            name: '-60801863'
+            widget: string
+          - hint: "Original text: Mais energia e \_displsição, key: 7db4e5df"
+            label: Text
+            name: 7db4e5df
+            widget: string
+          - hint: 'Original text: Melhora do sono, key: -31cb0d64'
+            label: Text
+            name: '-31cb0d64'
+            widget: string
+          - hint: >-
+              Original text: Frete grats para todo Brasil - Cancelamento a
+              qualuqer momento, key: -4eeed757
+            label: Text
+            name: '-4eeed757'
+            widget: string
+          - hint: 'Original text: Plano de 3 Meses, key: 16d496f7'
+            label: Text
+            name: 16d496f7
+            widget: string
+          - hint: 'Original text: R$ 123,00 trimestralmente, key: c1be856'
+            label: Text
+            name: c1be856
+            widget: string
+          - hint: 'Original text: R$ 80,00, key: -fb8965a'
+            label: Text
+            name: '-fb8965a'
+            widget: string
+          - hint: 'Original text: Plano mensal, key: -1b983e9e'
+            label: Text
+            name: '-1b983e9e'
+            widget: string
+          - hint: 'Original text: R$ 100,00, key: cb5a169'
+            label: Text
+            name: cb5a169
+            widget: string
+          - hint: 'Original text: Quero Experimentar, key: -3cb9b6b0'
+            label: Text
+            name: '-3cb9b6b0'
+            widget: string
+          - hint: 'Original text: Nossos benefícios, key: -d9cfa5a'
+            label: Text
+            name: '-d9cfa5a'
+            widget: string
+          - hint: 'Original text: Sono Regenerador, key: -55eb9c93'
+            label: Text
+            name: '-55eb9c93'
+            widget: string
+          - hint: 'Original text: Regulação do Humor, key: 70fbc411'
+            label: Text
+            name: 70fbc411
+            widget: string
+          - hint: 'Original text: Ameniza Estresse e Ansiedade, key: 1695cf16'
+            label: Text
+            name: 1695cf16
+            widget: string
+          - hint: 'Original text: Como Funciona, key: -dc3a111'
+            label: Text
+            name: '-dc3a111'
+            widget: string
+          - hint: >-
+              Original text: A fórmula foi testada várias vezes, até chegarmos
+              na combinação ideal de nutrientes para o seu cérebro., key:
+              -2b81c0bf
+            label: Text
+            name: '-2b81c0bf'
+            widget: text
+          - hint: 'Original text: Nutriente, key: 6795dd3e'
+            label: Text
+            name: 6795dd3e
+            widget: string
+          - hint: 'Original text: ONDE ENCONTRAR?, key: -57f0d009'
+            label: Text
+            name: '-57f0d009'
+            widget: string
+          - hint: 'Original text: QUANTIDADE, key: -683c39bc'
+            label: Text
+            name: '-683c39bc'
+            widget: string
+          - hint: 'Original text: VD%, key: 14b37'
+            label: Text
+            name: 14b37
+            widget: string
+          - hint: 'Original text: L-Triptofano, key: 2fd6955d'
+            label: Text
+            name: 2fd6955d
+            widget: string
+          - hint: 'Original text: Castanha de Caju, key: 43fa6b2d'
+            label: Text
+            name: 43fa6b2d
+            widget: string
+          - hint: 'Original text: 200mg, key: 2d72acc'
+            label: Text
+            name: 2d72acc
+            widget: string
+          - hint: 'Original text: 14, key: 623'
+            label: Text
+            name: '623'
+            widget: string
+          - hint: 'Original text: Vitamina B3, key: 1b68522'
+            label: Text
+            name: 1b68522
+            widget: string
+          - hint: 'Original text: Aveia, key: 3cb23c8'
+            label: Text
+            name: 3cb23c8
+            widget: string
+          - hint: 'Original text: 16mg, key: 171e7f'
+            label: Text
+            name: 171e7f
+            widget: string
+          - hint: 'Original text: Vitamina B12, key: 351a1f12'
+            label: Text
+            name: 351a1f12
+            widget: string
+          - hint: 'Original text: Salmão grelhado, key: 24e2fefb'
+            label: Text
+            name: 24e2fefb
+            widget: string
+          - hint: 'Original text: 2,4mcg, key: 57d7a217'
+            label: Text
+            name: 57d7a217
+            widget: string
+          - hint: 'Original text: L-Tirosina, key: 2700a57c'
+            label: Text
+            name: 2700a57c
+            widget: string
+          - hint: 'Original text: Feijão, key: 7d33e62c'
+            label: Text
+            name: 7d33e62c
+            widget: string
+          - hint: 'Original text: 300mg, key: 2e5424d'
+            label: Text
+            name: 2e5424d
+            widget: string
+          - hint: 'Original text: Cafeína, key: -7c699b7d'
+            label: Text
+            name: '-7c699b7d'
+            widget: string
+          - hint: 'Original text: Café, key: 1fee41'
+            label: Text
+            name: 1fee41
+            widget: string
+          - hint: 'Original text: 100mg, key: 2c9134b'
+            label: Text
+            name: 2c9134b
+            widget: string
+          - hint: 'Original text: Colina, key: 78a3927c'
+            label: Text
+            name: 78a3927c
+            widget: string
+          - hint: 'Original text: Brócolis, key: -51b3df9'
+            label: Text
+            name: '-51b3df9'
+            widget: string
+          - hint: 'Original text: 110mg, key: 2c987aa'
+            label: Text
+            name: 2c987aa
+            widget: string
+          - hint: 'Original text: Magnésio, key: 33db6b'
+            label: Text
+            name: 33db6b
+            widget: string
+          - hint: 'Original text: Espinafre, key: 7ebb979f'
+            label: Text
+            name: 7ebb979f
+            widget: string
+          - hint: 'Original text: 210mg, key: 2d79f2b'
+            label: Text
+            name: 2d79f2b
+            widget: string
+          - hint: 'Original text: Vitamina D, key: -42025ecd'
+            label: Text
+            name: '-42025ecd'
+            widget: string
+          - hint: 'Original text: Cogumelos, key: -10fc1782'
+            label: Text
+            name: '-10fc1782'
+            widget: string
+          - hint: 'Original text: 15 mcg, key: 56988595'
+            label: Text
+            name: '56988595'
+            widget: string
+          - hint: 'Original text: Vitamina E, key: -42025ecc'
+            label: Text
+            name: '-42025ecc'
+            widget: string
+          - hint: 'Original text: Abacate, key: 1b355b8f'
+            label: Text
+            name: 1b355b8f
+            widget: string
+          - hint: 'Original text: 15mg, key: 171abe'
+            label: Text
+            name: 171abe
+            widget: string
+          - hint: 'Original text: Desenvolvido por Experts, key: -3506312e'
+            label: Text
+            name: '-3506312e'
+            widget: string
+          - hint: >-
+              Original text: Texto que fala dos desenvolvedores dos produtos,
+              Texto que fala dos desenvolvedores dos produtosTexto que fala dos
+              desenvolvedores dos produtos, Texto que fala dos desenvolvedores
+              dos produtos, key: 663f77d8
+            label: Text
+            name: 663f77d8
+            widget: text
+          - hint: >-
+              Original text: Continuacao do texto que fala sobre os experts.,
+              key: bf0c0aa
+            label: Text
+            name: bf0c0aa
+            widget: string
+          - hint: >-
+              Original text: Cuide muito bem do seu cérebro, que ele vai cuidar
+              de você (hoje e no futuro)., key: -176da096
+            label: Text
+            name: '-176da096'
+            widget: string
+          - hint: >-
+              Original text: Energia aliada a concentração traz mais clareza
+              mental para você atingir seus objetivos e dormir com aquela
+              sensação de dever cumprido., key: -177c01a4
+            label: Text
+            name: '-177c01a4'
+            widget: text
+      - label: Links
+        name: links
+        file: cms/_data/links.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Links
+          - hint: 'Original link: #, key: 23'
+            label: Link
+            name: '23'
+            widget: string
+          - hint: 'Original link: /produtos/health/, key: 61391f0d'
+            label: Link
+            name: 61391f0d
+            widget: string
+          - hint: 'Original link: /produtos/recovery/, key: 3120c274'
+            label: Link
+            name: 3120c274
+            widget: string
+          - hint: 'Original link: /produtos/booster/, key: 7fe88025'
+            label: Link
+            name: 7fe88025
+            widget: string
+          - hint: 'Original link: /collections/bundles, key: -3a8bc6d8'
+            label: Link
+            name: '-3a8bc6d8'
+            widget: string
+          - hint: 'Original link: /collections/accessories, key: -1e0e5759'
+            label: Link
+            name: '-1e0e5759'
+            widget: string
+          - hint: >-
+              Original link:
+              https://hyperx.com/products/hyperx-pulsefire-haste-2-pro-4k-wireless-gaming-mouse?variant=46359079026845,
+              key: -1e78a519
+            label: Link
+            name: '-1e78a519'
+            widget: string
+          - hint: >-
+              Original link:
+              mailto:atendimento@num.health?subject=Atendimento%20NUM, key:
+              6e164e7f
+            label: Link
+            name: 6e164e7f
+            widget: string
+          - hint: >-
+              Original link:
+              https://api.whatsapp.com/send?phone=5527998880373&text=Ol%C3%A1%2C%20tenho%20uma%20d%C3%BAvida%20sobre%20o%20Suplemento%20Alimentar%20Cerebral%20da%20N%C3%9CM,
+              key: 63034569
+            label: Link
+            name: '63034569'
+            widget: string
+          - hint: 'Original link: /offer/build-your-bundle, key: c04f87b'
+            label: Link
+            name: c04f87b
+            widget: string
+          - hint: 'Original link: /collections/concentrates, key: eb34912'
+            label: Link
+            name: eb34912
+            widget: string
+          - hint: 'Original link: /recipes-categories/iced, key: 39996515'
+            label: Link
+            name: '39996515'
+            widget: string
+          - hint: 'Original link: https://help.javycoffee.com/, key: 6048cdd8'
+            label: Link
+            name: 6048cdd8
+            widget: string
+      - label: Images
+        name: images
+        file: cms/_data/images.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Images
+          - label: Image
+            name: i17828865
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: i46796a01
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-67388639'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 4cfbc7db
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 127013d5
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: df82603
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-7a700be7'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-43359aff'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 3c31f3e
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-371fbec7'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 4750aeaa
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 23fd60c
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-35c7a6e8'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-4e3fc172'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 30c16e18
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 8d641c1
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-5f676121'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: cfc995c
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+      - label: eCommerce
+        name: ecommerce
+        file: cms/_data/settings/ecommerce.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: eCommerce
+          - label: Currencies and Formats
+            name: currencies_and_formats
+            widget: object
+            fields:
+              - hint: >-
+                  Template used to format the price, you can use following
+                  placeholders: {amount}, {currencyCode}, {symbol}
+                name: template
+                label: Price Template
+                widget: string
+                required: true
+              - hint: Character to divide decimals
+                name: decimal
+                label: Decimal
+                widget: string
+                required: true
+              - hint: Character to group amount
+                name: group
+                label: Group
+                widget: string
+                required: true
+              - hint: Number of fraction digits
+                name: fractionDigits
+                label: Fraction Digits
+                widget: number
+                required: true
+                value_type: int
+              - hint: Hide decimals for whole prices
+                name: hideDecimalForWholeNumbers
+                label: Hide decimals
+                widget: boolean
+                required: false
+              - hint: ''
+                name: currencies
+                label: Currencies
+                widget: list
+                required: true
+                min: 1
+                fields:
+                  - hint: Currency Code (3 char) all lowercase
+                    name: currencyCode
+                    label: Currency Code
+                    widget: string
+                    required: true
+                  - hint: ''
+                    name: symbol
+                    label: Symbol
+                    widget: string
+                    required: true
+          - label: Snipcart
+            name: snipcart
+            widget: object
+            fields:
+              - hint: Public Api Key
+                name: apiKey
+                label: Api Key
+                widget: string
+                required: true
+          - label: Snipcart Style
+            name: css
+            widget: object
+            fields:
+              - hint: 'Original Font Family: Open Sans,sans-serif'
+                name: main-font
+                label: Main font
+                widget: string
+                required: true
+              - hint: 'Original Font Family: Montserrat,sans-serif'
+                name: heading-font
+                label: Heading font
+                widget: string
+                required: true
+              - hint: 'Original color: #f7f7f8'
+                name: bgColor-alt
+                label: BgColor alt
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #fff'
+                name: bgColor-badge
+                label: BgColor badge
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #fceae8'
+                name: bgColor-buttonDanger-active
+                label: BgColor buttonDanger active
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #fceae8'
+                name: bgColor-buttonDanger-focus
+                label: BgColor buttonDanger focus
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #fdefed'
+                name: bgColor-buttonDanger-hover
+                label: BgColor buttonDanger hover
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #1a4db3'
+                name: bgColor-buttonPrimary
+                label: BgColor buttonPrimary
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #1a4db3'
+                name: bgColor-buttonPrimary-active
+                label: BgColor buttonPrimary active
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #1a4db3'
+                name: bgColor-buttonPrimary-focus
+                label: BgColor buttonPrimary focus
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #0d59f2'
+                name: bgColor-buttonPrimary-hover
+                label: BgColor buttonPrimary hover
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #e7f6fe'
+                name: bgColor-buttonSecondary-active
+                label: BgColor buttonSecondary active
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #ecf8fe'
+                name: bgColor-buttonSecondary-focus
+                label: BgColor buttonSecondary focus
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #ecf8fe'
+                name: bgColor-buttonSecondary-hover
+                label: BgColor buttonSecondary hover
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #fff'
+                name: bgColor-default
+                label: BgColor default
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #fff'
+                name: bgColor-input
+                label: BgColor input
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #0aa7f5'
+                name: bgColor-input-checked
+                label: BgColor input checked
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #f1f2f4'
+                name: bgColor-input-disabled
+                label: BgColor input disabled
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #fff'
+                name: bgColor-input-focus
+                label: BgColor input focus
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #fff'
+                name: bgColor-input-hover
+                label: BgColor input hover
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: transparent'
+                name: bgColor-link
+                label: BgColor link
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #d9f0fc'
+                name: bgColor-link-focus
+                label: BgColor link focus
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #f1f2f4'
+                name: bgColor-modal
+                label: BgColor modal
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: transparent'
+                name: borderColor-badge
+                label: BorderColor badge
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: transparent'
+                name: borderColor-badge-active
+                label: BorderColor badge active
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #e3e6e8'
+                name: borderColor-badge-disabled
+                label: BorderColor badge disabled
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: transparent'
+                name: borderColor-buttonDanger
+                label: BorderColor buttonDanger
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: currentColor'
+                name: borderColor-buttonDanger-active
+                label: BorderColor buttonDanger active
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: transparent'
+                name: borderColor-buttonDanger-disabled
+                label: BorderColor buttonDanger disabled
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: transparent'
+                name: borderColor-buttonDanger-error
+                label: BorderColor buttonDanger error
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: transparent'
+                name: borderColor-buttonDanger-focus
+                label: BorderColor buttonDanger focus
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: transparent'
+                name: borderColor-buttonDanger-hover
+                label: BorderColor buttonDanger hover
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: transparent'
+                name: borderColor-buttonDanger-success
+                label: BorderColor buttonDanger success
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: transparent'
+                name: borderColor-buttonPrimary
+                label: BorderColor buttonPrimary
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: currentColor'
+                name: borderColor-buttonPrimary-active
+                label: BorderColor buttonPrimary active
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: transparent'
+                name: borderColor-buttonPrimary-disabled
+                label: BorderColor buttonPrimary disabled
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: currentColor'
+                name: borderColor-buttonPrimary-error
+                label: BorderColor buttonPrimary error
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: transparent'
+                name: borderColor-buttonPrimary-focus
+                label: BorderColor buttonPrimary focus
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: transparent'
+                name: borderColor-buttonPrimary-hover
+                label: BorderColor buttonPrimary hover
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: currentColor'
+                name: borderColor-buttonPrimary-success
+                label: BorderColor buttonPrimary success
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: transparent'
+                name: borderColor-buttonSecondary
+                label: BorderColor buttonSecondary
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: currentColor'
+                name: borderColor-buttonSecondary-active
+                label: BorderColor buttonSecondary active
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: transparent'
+                name: borderColor-buttonSecondary-disabled
+                label: BorderColor buttonSecondary disabled
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: transparent'
+                name: borderColor-buttonSecondary-error
+                label: BorderColor buttonSecondary error
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: transparent'
+                name: borderColor-buttonSecondary-focus
+                label: BorderColor buttonSecondary focus
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: transparent'
+                name: borderColor-buttonSecondary-hover
+                label: BorderColor buttonSecondary hover
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: transparent'
+                name: borderColor-buttonSecondary-success
+                label: BorderColor buttonSecondary success
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #e3e6e8'
+                name: borderColor-default
+                label: BorderColor default
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #e3e6e8'
+                name: borderColor-input
+                label: BorderColor input
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #0aa7f5'
+                name: borderColor-input-checked
+                label: BorderColor input checked
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #e3e6e8'
+                name: borderColor-input-disabled
+                label: BorderColor input disabled
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #e85a4a'
+                name: borderColor-input-error
+                label: BorderColor input error
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #0aa7f5'
+                name: borderColor-input-focus
+                label: BorderColor input focus
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #0aa7f5'
+                name: borderColor-input-hover
+                label: BorderColor input hover
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: currentColor'
+                name: borderColor-link
+                label: BorderColor link
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: currentColor'
+                name: borderColor-link-active
+                label: BorderColor link active
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: currentColor'
+                name: borderColor-link-focus
+                label: BorderColor link focus
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: currentColor'
+                name: borderColor-link-hover
+                label: BorderColor link hover
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: currentColor'
+                name: borderColor-success
+                label: BorderColor success
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #8f99a3'
+                name: color-alt
+                label: Color alt
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #0d59f2'
+                name: color-badge
+                label: Color badge
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #0d59f2'
+                name: color-badge-active
+                label: Color badge active
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #2e3338'
+                name: color-badge-disabled
+                label: Color badge disabled
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #9e2215'
+                name: color-buttonDanger
+                label: Color buttonDanger
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #9e2215'
+                name: color-buttonDanger-active
+                label: Color buttonDanger active
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #8f99a3'
+                name: color-buttonDanger-disabled
+                label: Color buttonDanger disabled
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #e85a4a'
+                name: color-buttonDanger-error
+                label: Color buttonDanger error
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #9e2215'
+                name: color-buttonDanger-focus
+                label: Color buttonDanger focus
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #e85a4a'
+                name: color-buttonDanger-hover
+                label: Color buttonDanger hover
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #29c768'
+                name: color-buttonDanger-success
+                label: Color buttonDanger success
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #fff'
+                name: color-buttonPrimary
+                label: Color buttonPrimary
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #fff'
+                name: color-buttonPrimary-active
+                label: Color buttonPrimary active
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #e3e6e8'
+                name: color-buttonPrimary-disabled
+                label: Color buttonPrimary disabled
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #fff'
+                name: color-buttonPrimary-error
+                label: Color buttonPrimary error
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #fff'
+                name: color-buttonPrimary-focus
+                label: Color buttonPrimary focus
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #fff'
+                name: color-buttonPrimary-hover
+                label: Color buttonPrimary hover
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #fff'
+                name: color-buttonPrimary-success
+                label: Color buttonPrimary success
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #133986'
+                name: color-buttonSecondary
+                label: Color buttonSecondary
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #133986'
+                name: color-buttonSecondary-active
+                label: Color buttonSecondary active
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #8f99a3'
+                name: color-buttonSecondary-disabled
+                label: Color buttonSecondary disabled
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #e85a4a'
+                name: color-buttonSecondary-error
+                label: Color buttonSecondary error
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #133986'
+                name: color-buttonSecondary-focus
+                label: Color buttonSecondary focus
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #1a4db3'
+                name: color-buttonSecondary-hover
+                label: Color buttonSecondary hover
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #29c768'
+                name: color-buttonSecondary-success
+                label: Color buttonSecondary success
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #2e3338'
+                name: color-default
+                label: Color default
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #e85a4a'
+                name: color-error
+                label: Color error
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #2e3338'
+                name: color-input
+                label: Color input
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #fff'
+                name: color-input-checked
+                label: Color input checked
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #8f99a3'
+                name: color-input-disabled
+                label: Color input disabled
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #9e2215'
+                name: color-input-error
+                label: Color input error
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #2e3338'
+                name: color-input-focus
+                label: Color input focus
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #2e3338'
+                name: color-input-hover
+                label: Color input hover
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #8f99a3'
+                name: color-inputIcon
+                label: Color inputIcon
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #2e3338'
+                name: color-inputLabel
+                label: Color inputLabel
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #1a4db3'
+                name: color-link
+                label: Color link
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #1a4db3'
+                name: color-link-active
+                label: Color link active
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #1a4db3'
+                name: color-link-focus
+                label: Color link focus
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #0d59f2'
+                name: color-link-hover
+                label: Color link hover
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+              - hint: 'Original color: #29c768'
+                name: color-success
+                label: Color success
+                widget: color
+                required: true
+                enableAlpha: true
+                allowInput: true
+publish_mode: editorial_workflow
