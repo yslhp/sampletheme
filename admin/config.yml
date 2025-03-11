@@ -87,6 +87,16 @@ collections:
             name: additional_tags
             widget: text
             required: false
+  - name: pages-utility
+    label: Pages utility
+    identifier_field: title
+    extension: md
+    create: false
+    delete: false
+    slug: '{{slug}}'
+    editor: *ref_0
+    folder: cms/pages/utility
+    fields: *ref_1
   - name: pages-style-guide
     label: Pages style-guide
     identifier_field: title
@@ -97,16 +107,330 @@ collections:
     editor: *ref_0
     folder: cms/pages/style-guide
     fields: *ref_1
-  - name: pages-produtos
-    label: Pages produtos
-    identifier_field: title
+  - name: location
+    label: Locations
+    folder: cms/location
+    create: true
+    identifier_field: name
     extension: md
-    create: false
-    delete: false
     slug: '{{slug}}'
-    editor: *ref_0
-    folder: cms/pages/produtos
-    fields: *ref_1
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: location
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[location].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_2
+  - name: newsletter_signups
+    label: Newsletter Signups
+    folder: cms/newsletter-signups
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: f_accepts-marketing
+        label: Accepts Marketing
+        widget: boolean
+        required: false
+        default: false
+      - hint: ''
+        name: f_email
+        label: Email
+        widget: string
+        required: false
+      - hint: ''
+        name: f_location
+        label: Location
+        widget: relation
+        required: false
+        collection: location
+        value_field: cms/location/{{slug}}.md
+        search_fields:
+          - slug
+          - name
+        display_fields:
+          - title
+        multiple: false
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: newsletter-signups
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[newsletter-signups].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_2
+  - name: product_pdfs
+    label: Product PDFs
+    folder: cms/product-pdfs
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: product-pdfs
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[product-pdfs].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_2
+  - name: collection
+    label: Collections
+    folder: cms/collection
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: collection
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[collection].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_2
+  - name: pdp_belowfold
+    label: PDP BelowFolds
+    folder: cms/pdp-belowfold
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: f_headline
+        label: headline
+        widget: string
+        required: false
+      - hint: ''
+        name: f_hero-image
+        label: Hero Image
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_button
+        label: Button
+        widget: string
+        required: false
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: pdp-belowfold
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[pdp-belowfold].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_2
+  - name: news
+    label: News
+    folder: cms/news
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - label: Content
+        name: body
+        widget: markdown
+        required: false
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - hint: A summary of the blog post that appears on blog post grid
+        name: f_excerpt
+        label: Excerpt
+        widget: text
+        required: false
+      - hint: ''
+        name: f_image
+        label: Image
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_color
+        label: Color
+        widget: color
+        required: false
+        enableAlpha: true
+        allowInput: true
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: news
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[news].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_2
   - name: category
     label: Categories
     folder: cms/category
@@ -135,6 +459,28 @@ collections:
         label: Published On
         widget: datetime
         required: false
+      - hint: ''
+        name: f_description
+        label: Description
+        widget: string
+        required: false
+      - hint: ''
+        name: f_main-image
+        label: Main Image
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
       - label: Tags
         widget: hidden
         name: tags
@@ -303,6 +649,10 @@ collections:
             label: SKU
             widget: string
             required: false
+      - label: Content
+        name: body
+        widget: markdown
+        required: false
       - hint: ''
         name: title
         label: Name
@@ -465,77 +815,39 @@ collections:
             name: title
             widget: hidden
             default: Texts
-          - hint: 'Original text: Shop by Category, key: -18320f43'
+          - hint: 'Original text: Your Cart, key: -77ee8913'
             label: Text
-            name: '-18320f43'
+            name: '-77ee8913'
             widget: string
-          - hint: 'Original text: Gaming Headsets, key: -3baf44fe'
+          - hint: 'Original text: Subtotal, key: -76f396dc'
             label: Text
-            name: '-3baf44fe'
+            name: '-76f396dc'
             widget: string
-          - hint: 'Original text: Recovery, key: -2bc71c4b'
+          - hint: 'Original text: Continue to Checkout, key: -7941186e'
             label: Text
-            name: '-2bc71c4b'
+            name: '-7941186e'
             widget: string
-          - hint: 'Original text: Booster, key: 67176b70'
+          - hint: 'Original text: No items found., key: 3d503d2b'
             label: Text
-            name: 67176b70
+            name: 3d503d2b
+            widget: string
+          - hint: >-
+              Original text: Product is not available in this quantity., key:
+              -1c765d0d
+            label: Text
+            name: '-1c765d0d'
             widget: string
           - hint: 'Original text: Sale, key: 273467'
             label: Text
             name: '273467'
             widget: string
-          - hint: 'Original text: Gamer Bundle, key: 65830e22'
+          - hint: 'Original text: Dropdown, key: -15e657cf'
             label: Text
-            name: '65830e22'
+            name: '-15e657cf'
             widget: string
-          - hint: 'Original text: HX3D, key: 220b81'
+          - hint: 'Original text: Link 1, key: -78547655'
             label: Text
-            name: 220b81
-            widget: string
-          - hint: 'Original text: NGENUITY, key: -335898c5'
-            label: Text
-            name: '-335898c5'
-            widget: string
-          - hint: 'Original text: Produtos, key: -37f98b46'
-            label: Text
-            name: '-37f98b46'
-            widget: string
-          - hint: 'Original text: Ingredientes, key: -25575da1'
-            label: Text
-            name: '-25575da1'
-            widget: string
-          - hint: 'Original text: Bundles, key: 713f7811'
-            label: Text
-            name: 713f7811
-            widget: string
-          - hint: 'Original text: Sobre Nos, key: 251c9c2b'
-            label: Text
-            name: 251c9c2b
-            widget: string
-          - hint: 'Original text: 🍂 Limited Time Fall Sale, key: 1a096299'
-            label: Text
-            name: 1a096299
-            widget: string
-          - hint: 'Original text: Recovery , key: -4d1c6cf5'
-            label: Text
-            name: '-4d1c6cf5'
-            widget: string
-          - hint: 'Original text: Health, key: -7f661184'
-            label: Text
-            name: '-7f661184'
-            widget: string
-          - hint: 'Original text: Frequently Asked Questions, key: -475b7d60'
-            label: Text
-            name: '-475b7d60'
-            widget: string
-          - hint: 'Original text: Minha Conta, key: 2986e59a'
-            label: Text
-            name: 2986e59a
-            widget: string
-          - hint: 'Original text: Entre em Contato, key: -48b0744c'
-            label: Text
-            name: '-48b0744c'
+            name: '-78547655'
             widget: string
           - hint: 'Original text: Welcome to , key: 63190f27'
             label: Text
@@ -546,231 +858,159 @@ collections:
             name: '-4a5f84da'
             widget: string
           - hint: >-
+              Original text: This is some text inside of a div block., key:
+              7635fb4f
+            label: Text
+            name: 7635fb4f
+            widget: string
+          - hint: 'Original text: LEARN MORE, key: 552c03d1'
+            label: Text
+            name: 552c03d1
+            widget: string
+          - hint: 'Original text: Top Categories, key: 45fdce07'
+            label: Text
+            name: 45fdce07
+            widget: string
+          - hint: 'Original text: GAMING HEADSETS, key: -38f6e4fe'
+            label: Text
+            name: '-38f6e4fe'
+            widget: string
+          - hint: 'Original text: MICROPHONES, key: 65702069'
+            label: Text
+            name: '65702069'
+            widget: string
+          - hint: 'Original text: GAMING KEYBOARDS, key: -3726c965'
+            label: Text
+            name: '-3726c965'
+            widget: string
+          - hint: 'Original text: GAMING PCS, key: 4332394f'
+            label: Text
+            name: 4332394f
+            widget: string
+          - hint: 'Original text: Free Standard Shipping on All Orders, key: 4480b3a2'
+            label: Text
+            name: 4480b3a2
+            widget: string
+          - hint: 'Original text: Price Guarantee, key: 2a622431'
+            label: Text
+            name: 2a622431
+            widget: string
+          - hint: 'Original text: 30 Day Price Guarantee, key: -49028ab6'
+            label: Text
+            name: '-49028ab6'
+            widget: string
+          - hint: >-
+              Original text: Up to 2 year warranty on all Products, key:
+              -793ca46b
+            label: Text
+            name: '-793ca46b'
+            widget: string
+          - hint: 'Original text: Welcome to the Next Level, key: -3b5f85f3'
+            label: Text
+            name: '-3b5f85f3'
+            widget: string
+          - hint: >-
               Original text: The HyperX Pulsefire Haste 2 Pro 4K delivers
               next-level gaming performance as our first mouse with a true 4K
               polling rate., key: 68bb0f2e
             label: Text
             name: 68bb0f2e
             widget: text
-          - hint: 'Original text: LEARN MORE, key: 552c03d1'
+          - hint: 'Original text: SHOP NOW, key: 1a08228c'
             label: Text
-            name: 552c03d1
-            widget: string
-          - hint: 'Original text: Sem corantes, key: -535ea6ac'
-            label: Text
-            name: '-535ea6ac'
-            widget: string
-          - hint: 'Original text: Sem alérgenos, key: 3afc05fb'
-            label: Text
-            name: 3afc05fb
-            widget: string
-          - hint: 'Original text: Sem contaminantes, key: -41808cf3'
-            label: Text
-            name: '-41808cf3'
-            widget: string
-          - hint: 'Original text: Sem glúten, key: 409f72cd'
-            label: Text
-            name: 409f72cd
-            widget: string
-          - hint: 'Original text: Vegano, key: -677fa896'
-            label: Text
-            name: '-677fa896'
-            widget: string
-          - hint: 'Original text: GMO texto, key: -1210f9d5'
-            label: Text
-            name: '-1210f9d5'
-            widget: string
-          - hint: 'Original text: Para os curiosos., key: -f2f113f'
-            label: Text
-            name: '-f2f113f'
+            name: 1a08228c
             widget: string
           - hint: >-
-              Original text: Lorem ipsum dolor sir amet hahaha super
-              interessante, key: 6783921
+              Original text: Elevate Your Mouse, Lower The Friction, key:
+              -3824fb26
             label: Text
-            name: '6783921'
-            widget: string
-          - hint: 'Original text: Como tomar?, key: 788154ce'
-            label: Text
-            name: 788154ce
+            name: '-3824fb26'
             widget: string
           - hint: >-
-              Original text: A recomendação é tomar 2 cápsulas por dia. Não
-              ultrapassando a dose de 4 cápsulas diárias. , key: 341d2ea8
+              Original text: HyperX Glass Skates provide an instant upgrade to
+              nearly any HyperX mouse., key: -3b373b65
             label: Text
-            name: 341d2ea8
-            widget: text
-          - hint: 'Original text: Preciso tomar em jejum?, key: 7e496378'
+            name: '-3b373b65'
+            widget: string
+          - hint: 'Original text: Best sellers, key: 181782b8'
             label: Text
-            name: '7e496378'
+            name: 181782b8
+            widget: string
+          - hint: "Original text: ON\_SALE, key: -1ee44d98"
+            label: Text
+            name: '-1ee44d98'
+            widget: string
+          - hint: 'Original text: Join the #HyperXFamily on social!, key: -7da8b67b'
+            label: Text
+            name: '-7da8b67b'
             widget: string
           - hint: >-
-              Original text: Não é necessário estar em jejum para tomar., key:
-              -3edcc46a
+              Original text: Get a sneak peek at our new products and deals when
+              you sign up to join the HyperX Family., key: -737d92ee
             label: Text
-            name: '-3edcc46a'
-            widget: string
-          - hint: 'Original text: Tem algum efeito colateral?, key: 7e45f5a4'
-            label: Text
-            name: 7e45f5a4
+            name: '-737d92ee'
             widget: string
           - hint: >-
-              Original text: Não há efeitos colaterais negativos ao tomar nosso
-              suplemento. Ele é um Suplemento Alimentar Cerebral com nutrientes
-              que podem ser encontrados em alimentos. Foi testado em
-              laboratório, com ingredientes da mais alta qualidade que foram
-              cuidadosamente pesquisados por profissionais da área ​​para ajudar
-              a melhorar sua saúde e performance mental., key: -53ddeb30
+              Original text: Sign up for our newsletter to receive a 10%
+              discount!, key: 6fda305f
             label: Text
-            name: '-53ddeb30'
-            widget: text
-          - hint: >-
-              Original text: Quanto tempo para ver os resultados com o nüm?,
-              key: 35b91034
-            label: Text
-            name: 35b91034
+            name: 6fda305f
             widget: string
           - hint: >-
-              Original text: O resultado varia de acordo com o seu estilo de
-              vida. Nosso suplemento não é uma pílula mágica ou remédio. É um
-              suplemento alimentar que visa suprir as necessidades nutricionais
-              do seu cérebro. Se você já segue o estilo de vida #Braincare em
-              pelo menos 60 dias você já consegue sentir todos os benefícios de
-              um cérebro bem cuidado., key: 62eb4aa
+              Original text: Click to confirm that you accept our , key:
+              -7f4c1661
             label: Text
-            name: 62eb4aa
-            widget: text
-          - hint: >-
-              Original text: Posso tomar junto com outros suplementos?, key:
-              -5a5dbc00
+            name: '-7f4c1661'
+            widget: string
+          - hint: 'Original text: Privacy Policy, key: -3fbde6f6'
             label: Text
-            name: '-5a5dbc00'
+            name: '-3fbde6f6'
             widget: string
           - hint: >-
-              Original text: Sim, você pode tomar com outros suplementos. Isso
-              inclui creatina e shakes de proteína., key: 79fa5226
+              Original text: Thank you! Your submission has been received!, key:
+              5a0ea5a1
             label: Text
-            name: 79fa5226
-            widget: string
-          - hint: 'Original text: Qual o melhor horário para tomar?, key: -35707029'
-            label: Text
-            name: '-35707029'
+            name: 5a0ea5a1
             widget: string
           - hint: >-
-              Original text: O consumo pode ser em qualquer horário durante o
-              dia. Somente não recomendamos após as 16:00 da tarde por conter
-              cafeína na fórmula e o que pode interferir no seu sono., key:
-              -53f2d898
+              Original text: Oops! Something went wrong while submitting the
+              form., key: -7c112e99
             label: Text
-            name: '-53f2d898'
-            widget: text
-          - hint: 'Original text: Como ele funciona dentro do cérebro?, key: 1420d0e1'
-            label: Text
-            name: 1420d0e1
+            name: '-7c112e99'
             widget: string
-          - hint: >-
-              Original text: O nosso suplemento tem em sua composição
-              substâncias naturais, não-tóxicas, que agem diretamente no seu
-              sistema nervoso central e, com isso, estimulam seus
-              neurotransmissores., key: -66030104
+          - hint: 'Original text: Support, key: -b54e851'
             label: Text
-            name: '-66030104'
-            widget: text
-          - hint: >-
-              Original text: Essas substâncias atuam como mensageiros químicos,
-              transportando, estimulando e equilibrando os sinais dos neurônios,
-              células nervosas e outras células do corpo., key: -4639f67
-            label: Text
-            name: '-4639f67'
-            widget: text
-          - hint: >-
-              Original text: Assim, trabalham para acelerar o seu raciocínio,
-              aumentar a sua capacidade de concentração, diminuir sua fadiga
-              mental e potencializar a sua memória., key: -38c90996
-            label: Text
-            name: '-38c90996'
-            widget: text
-          - hint: 'Original text: Qualquer um pode tomar?, key: -4ecfe82c'
-            label: Text
-            name: '-4ecfe82c'
+            name: '-b54e851'
             widget: string
-          - hint: >-
-              Original text: Para gestantes, lactantes e pessoas que fazem uso
-              de outros medicamentos, como antidepressivos ou ansiolíticos,
-              recomendamos prévia orientação médica. Os demais, que não se
-              enquadram nessas exceções, podem consumir diariamente 2 cápsulas
-              do nosso suplemento para apoiar o desempenho mental e a cognição.,
-              key: 4fa6515
+          - hint: 'Original text: Product Support, key: -45b726a2'
             label: Text
-            name: 4fa6515
-            widget: text
-          - hint: >-
-              Original text: Contém calorias, açúcares ou carboidratos?, key:
-              4e70c262
-            label: Text
-            name: 4e70c262
+            name: '-45b726a2'
             widget: string
-          - hint: >-
-              Original text: Não. Nós usamos uma mistura de ingredientes veganos
-              com ZERO açúcares, carboidratos ou calorias!, key: -76d9d10e
+          - hint: 'Original text: Company, key: -64202ba3'
             label: Text
-            name: '-76d9d10e'
-            widget: text
-          - hint: 'Original text: Esse site é seguro?, key: -5ae49a6e'
-            label: Text
-            name: '-5ae49a6e'
+            name: '-64202ba3'
             widget: string
-          - hint: >-
-              Original text: Sim. Nosso site é totalmente certificado, usando os
-              mais recentes padrões de segurança., key: -6c07e28c
+          - hint: 'Original text: Other Resources, key: -26355b2b'
             label: Text
-            name: '-6c07e28c'
-            widget: string
-          - hint: 'Original text: NUM, key: 12f66'
-            label: Text
-            name: 12f66
-            widget: string
-          - hint: 'Original text: Comprar, key: -641fed6c'
-            label: Text
-            name: '-641fed6c'
-            widget: string
-          - hint: 'Original text: Ajuda, key: 3c5eac9'
-            label: Text
-            name: 3c5eac9
-            widget: string
-          - hint: 'Original text: CONTATO, key: 6382b20a'
-            label: Text
-            name: 6382b20a
-            widget: string
-          - hint: 'Original text: E-Mail, key: 785cfe5f'
-            label: Text
-            name: 785cfe5f
-            widget: string
-          - hint: 'Original text: Whatsapp, key: 772ccdb2'
-            label: Text
-            name: 772ccdb2
-            widget: string
-          - hint: 'Original text: © 2023 NUM. All right reserved., key: -1d40036b'
-            label: Text
-            name: '-1d40036b'
-            widget: string
-          - hint: 'Original text: Política de Privacidade, key: 1f851c4'
-            label: Text
-            name: 1f851c4
-            widget: string
-          - hint: 'Original text: Termos de Uso, key: -21f06bfe'
-            label: Text
-            name: '-21f06bfe'
+            name: '-26355b2b'
             widget: string
           - hint: 'Original text: Protected Page, key: -11d4bbff'
             label: Text
             name: '-11d4bbff'
+            widget: string
+          - hint: 'Original text: Password, key: 4c641ebb'
+            label: Text
+            name: 4c641ebb
             widget: string
           - hint: >-
               Original text: Incorrect password. Please try again., key:
               -f5c4b5f
             label: Text
             name: '-f5c4b5f'
+            widget: string
+          - hint: 'Original text: © 2025 HyperX, key: -1d5e0d6c'
+            label: Text
+            name: '-1d5e0d6c'
             widget: string
           - hint: 'Original text: Page Not Found, key: -40b0787c'
             label: Text
@@ -782,281 +1022,1276 @@ collections:
             label: Text
             name: 556d64d8
             widget: string
-          - hint: 'Original text: ⚡️, key: 5ab8e'
+          - hint: 'Original text: Access Denied, key: -2624ce29'
             label: Text
-            name: 5ab8e
-            widget: string
-          - hint: 'Original text: BUILD YOUR BUNDLE, key: 68e44a3d'
-            label: Text
-            name: 68e44a3d
-            widget: string
-          - hint: 'Original text: 🧋, key: 1b0d4d'
-            label: Text
-            name: 1b0d4d
-            widget: string
-          - hint: 'Original text: COFFEE CONCENTRATES, key: 6690f7d'
-            label: Text
-            name: 6690f7d
-            widget: string
-          - hint: 'Original text: RECIPES, key: 6b4fe885'
-            label: Text
-            name: 6b4fe885
-            widget: string
-          - hint: 'Original text: 💸, key: 1b0c1b'
-            label: Text
-            name: 1b0c1b
-            widget: string
-          - hint: 'Original text: AFFILIATE PROGRAM, key: 24ec5e71'
-            label: Text
-            name: 24ec5e71
-            widget: string
-          - hint: 'Original text: 📧, key: 1b0c4a'
-            label: Text
-            name: 1b0c4a
-            widget: string
-          - hint: 'Original text: SUPPORT, key: -43c1f451'
-            label: Text
-            name: '-43c1f451'
-            widget: string
-          - hint: 'Original text: Mais de 1,319 clientes satisfeitos, key: 12cbebf4'
-            label: Text
-            name: 12cbebf4
+            name: '-2624ce29'
             widget: string
           - hint: >-
-              Original text: Um bom dia começa com uma boa noite de sono. Depois
-              de um dia intenso, está na hora de desacelerar e regenerar., key:
-              -2a05fc7a
+              Original text: A site membership is required to view this page.
+              Please , key: 4617a544
             label: Text
-            name: '-2a05fc7a'
+            name: 4617a544
+            widget: string
+          - hint: 'Original text: Sign up, key: -204ff442'
+            label: Text
+            name: '-204ff442'
+            widget: string
+          - hint: 'Original text:  or , key: 103a7d'
+            label: Text
+            name: 103a7d
+            widget: string
+          - hint: 'Original text: Log in, key: -7804285f'
+            label: Text
+            name: '-7804285f'
+            widget: string
+          - hint: 'Original text: ., key: 2e'
+            label: Text
+            name: 2e
+            widget: string
+          - hint: 'Original text: Shop by Collection, key: 7702ee9d'
+            label: Text
+            name: 7702ee9d
+            widget: string
+          - hint: 'Original text: Your addresses, key: -7fbe47eb'
+            label: Text
+            name: '-7fbe47eb'
+            widget: string
+          - hint: 'Original text: 123 Main Street, key: -38ee3ca4'
+            label: Text
+            name: '-38ee3ca4'
+            widget: string
+          - hint: 'Original text: First Name, key: 69b3163b'
+            label: Text
+            name: 69b3163b
+            widget: string
+          - hint: 'Original text: Last Name, key: -1416662b'
+            label: Text
+            name: '-1416662b'
+            widget: string
+          - hint: 'Original text: Address Line, key: 160224e0'
+            label: Text
+            name: '160224e0'
+            widget: string
+          - hint: 'Original text: City, key: 200d8b'
+            label: Text
+            name: 200d8b
+            widget: string
+          - hint: 'Original text: Zip, key: 15f01'
+            label: Text
+            name: 15f01
+            widget: string
+          - hint: 'Original text: Phone, key: 4984d4e'
+            label: Text
+            name: 4984d4e
+            widget: string
+          - hint: 'Original text: Country, key: -63b0108a'
+            label: Text
+            name: '-63b0108a'
+            widget: string
+          - hint: 'Original text: Select one..., key: 57f3b1cc'
+            label: Text
+            name: 57f3b1cc
+            widget: string
+          - hint: 'Original text: First Choice, key: -491b32af'
+            label: Text
+            name: '-491b32af'
+            widget: string
+          - hint: 'Original text: Second Choice, key: 3c4172cd'
+            label: Text
+            name: 3c4172cd
+            widget: string
+          - hint: 'Original text: Third Choice, key: -1b351146'
+            label: Text
+            name: '-1b351146'
+            widget: string
+          - hint: 'Original text: Province, key: -370170b0'
+            label: Text
+            name: '-370170b0'
+            widget: string
+          - hint: 'Original text: Default Address?, key: 60b0e0a'
+            label: Text
+            name: 60b0e0a
+            widget: string
+          - hint: 'Original text: New address, key: 6234e954'
+            label: Text
+            name: '6234e954'
+            widget: string
+          - hint: 'Original text: Address Line 1, key: -61f38f0f'
+            label: Text
+            name: '-61f38f0f'
+            widget: string
+          - hint: 'Original text: Address Line 2, key: -61f38f0e'
+            label: Text
+            name: '-61f38f0e'
+            widget: string
+          - hint: 'Original text: Cart today, key: -6b0ecd9f'
+            label: Text
+            name: '-6b0ecd9f'
+            widget: string
+          - hint: 'Original text: Product Title, key: 150193a7'
+            label: Text
+            name: 150193a7
+            widget: string
+          - hint: 'Original text: 300$, key: 17e911'
+            label: Text
+            name: '17e911'
+            widget: string
+          - hint: 'Original text: Remove, key: -6e501b5c'
+            label: Text
+            name: '-6e501b5c'
+            widget: string
+          - hint: 'Original text: Subtotal:, key: -677f446a'
+            label: Text
+            name: '-677f446a'
+            widget: string
+          - hint: 'Original text: Discounts:, key: -692decb8'
+            label: Text
+            name: '-692decb8'
+            widget: string
+          - hint: 'Original text: Total:, key: -6a56866a'
+            label: Text
+            name: '-6a56866a'
+            widget: string
+          - hint: 'Original text: Our products, key: -7e3a3428'
+            label: Text
+            name: '-7e3a3428'
+            widget: string
+          - hint: >-
+              Original text: Lorem ipsum dolor sit amet, consectetur adipiscing
+              elit. Suspendisse varius enim in eros elementum tristique. Duis
+              cursus, mi quis viverra ornare, eros dolor interdum nulla, ut
+              commodo diam libero vitae erat. Aenean faucibus nibh et justo
+              cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus
+              tristique posuere., key: -5286fc08
+            label: Text
+            name: '-5286fc08'
             widget: text
-          - hint: "Original text: Melhora no foco e \_concentração, key: -60801863"
+          - hint: 'Original text: Contact, key: -64104400'
             label: Text
-            name: '-60801863'
+            name: '-64104400'
             widget: string
-          - hint: "Original text: Mais energia e \_displsição, key: 7db4e5df"
+          - hint: 'Original text: First name *, key: -1e749b'
             label: Text
-            name: 7db4e5df
+            name: '-1e749b'
             widget: string
-          - hint: 'Original text: Melhora do sono, key: -31cb0d64'
+          - hint: 'Original text: Last name *, key: -317a6f81'
             label: Text
-            name: '-31cb0d64'
+            name: '-317a6f81'
             widget: string
-          - hint: >-
-              Original text: Frete grats para todo Brasil - Cancelamento a
-              qualuqer momento, key: -4eeed757
+          - hint: 'Original text: Email *, key: 1967086'
             label: Text
-            name: '-4eeed757'
+            name: '1967086'
             widget: string
-          - hint: 'Original text: Plano de 3 Meses, key: 16d496f7'
+          - hint: 'Original text: Phone number, key: -1f5cfda5'
             label: Text
-            name: 16d496f7
+            name: '-1f5cfda5'
             widget: string
-          - hint: 'Original text: R$ 123,00 trimestralmente, key: c1be856'
+          - hint: 'Original text: Message, key: -63dc6819'
             label: Text
-            name: c1be856
+            name: '-63dc6819'
             widget: string
-          - hint: 'Original text: R$ 80,00, key: -fb8965a'
+          - hint: 'Original text: Page Title, key: 6abc1d87'
             label: Text
-            name: '-fb8965a'
+            name: 6abc1d87
             widget: string
-          - hint: 'Original text: Plano mensal, key: -1b983e9e'
+          - hint: 'Original text: What’s a Rich Text element?, key: -3c0dda4d'
             label: Text
-            name: '-1b983e9e'
-            widget: string
-          - hint: 'Original text: R$ 100,00, key: cb5a169'
-            label: Text
-            name: cb5a169
-            widget: string
-          - hint: 'Original text: Quero Experimentar, key: -3cb9b6b0'
-            label: Text
-            name: '-3cb9b6b0'
-            widget: string
-          - hint: 'Original text: Nossos benefícios, key: -d9cfa5a'
-            label: Text
-            name: '-d9cfa5a'
-            widget: string
-          - hint: 'Original text: Sono Regenerador, key: -55eb9c93'
-            label: Text
-            name: '-55eb9c93'
-            widget: string
-          - hint: 'Original text: Regulação do Humor, key: 70fbc411'
-            label: Text
-            name: 70fbc411
-            widget: string
-          - hint: 'Original text: Ameniza Estresse e Ansiedade, key: 1695cf16'
-            label: Text
-            name: 1695cf16
-            widget: string
-          - hint: 'Original text: Como Funciona, key: -dc3a111'
-            label: Text
-            name: '-dc3a111'
+            name: '-3c0dda4d'
             widget: string
           - hint: >-
-              Original text: A fórmula foi testada várias vezes, até chegarmos
-              na combinação ideal de nutrientes para o seu cérebro., key:
-              -2b81c0bf
+              Original text: The rich text element allows you to create and
+              format headings, paragraphs, blockquotes, images, and video all in
+              one place instead of having to add and format them individually.
+              Just double-click and easily create content., key: 2e633c6a
             label: Text
-            name: '-2b81c0bf'
+            name: 2e633c6a
             widget: text
-          - hint: 'Original text: Nutriente, key: 6795dd3e'
+          - hint: 'Original text: Static and dynamic content editing, key: 57fa6135'
             label: Text
-            name: 6795dd3e
-            widget: string
-          - hint: 'Original text: ONDE ENCONTRAR?, key: -57f0d009'
-            label: Text
-            name: '-57f0d009'
-            widget: string
-          - hint: 'Original text: QUANTIDADE, key: -683c39bc'
-            label: Text
-            name: '-683c39bc'
-            widget: string
-          - hint: 'Original text: VD%, key: 14b37'
-            label: Text
-            name: 14b37
-            widget: string
-          - hint: 'Original text: L-Triptofano, key: 2fd6955d'
-            label: Text
-            name: 2fd6955d
-            widget: string
-          - hint: 'Original text: Castanha de Caju, key: 43fa6b2d'
-            label: Text
-            name: 43fa6b2d
-            widget: string
-          - hint: 'Original text: 200mg, key: 2d72acc'
-            label: Text
-            name: 2d72acc
-            widget: string
-          - hint: 'Original text: 14, key: 623'
-            label: Text
-            name: '623'
-            widget: string
-          - hint: 'Original text: Vitamina B3, key: 1b68522'
-            label: Text
-            name: 1b68522
-            widget: string
-          - hint: 'Original text: Aveia, key: 3cb23c8'
-            label: Text
-            name: 3cb23c8
-            widget: string
-          - hint: 'Original text: 16mg, key: 171e7f'
-            label: Text
-            name: 171e7f
-            widget: string
-          - hint: 'Original text: Vitamina B12, key: 351a1f12'
-            label: Text
-            name: 351a1f12
-            widget: string
-          - hint: 'Original text: Salmão grelhado, key: 24e2fefb'
-            label: Text
-            name: 24e2fefb
-            widget: string
-          - hint: 'Original text: 2,4mcg, key: 57d7a217'
-            label: Text
-            name: 57d7a217
-            widget: string
-          - hint: 'Original text: L-Tirosina, key: 2700a57c'
-            label: Text
-            name: 2700a57c
-            widget: string
-          - hint: 'Original text: Feijão, key: 7d33e62c'
-            label: Text
-            name: 7d33e62c
-            widget: string
-          - hint: 'Original text: 300mg, key: 2e5424d'
-            label: Text
-            name: 2e5424d
-            widget: string
-          - hint: 'Original text: Cafeína, key: -7c699b7d'
-            label: Text
-            name: '-7c699b7d'
-            widget: string
-          - hint: 'Original text: Café, key: 1fee41'
-            label: Text
-            name: 1fee41
-            widget: string
-          - hint: 'Original text: 100mg, key: 2c9134b'
-            label: Text
-            name: 2c9134b
-            widget: string
-          - hint: 'Original text: Colina, key: 78a3927c'
-            label: Text
-            name: 78a3927c
-            widget: string
-          - hint: 'Original text: Brócolis, key: -51b3df9'
-            label: Text
-            name: '-51b3df9'
-            widget: string
-          - hint: 'Original text: 110mg, key: 2c987aa'
-            label: Text
-            name: 2c987aa
-            widget: string
-          - hint: 'Original text: Magnésio, key: 33db6b'
-            label: Text
-            name: 33db6b
-            widget: string
-          - hint: 'Original text: Espinafre, key: 7ebb979f'
-            label: Text
-            name: 7ebb979f
-            widget: string
-          - hint: 'Original text: 210mg, key: 2d79f2b'
-            label: Text
-            name: 2d79f2b
-            widget: string
-          - hint: 'Original text: Vitamina D, key: -42025ecd'
-            label: Text
-            name: '-42025ecd'
-            widget: string
-          - hint: 'Original text: Cogumelos, key: -10fc1782'
-            label: Text
-            name: '-10fc1782'
-            widget: string
-          - hint: 'Original text: 15 mcg, key: 56988595'
-            label: Text
-            name: '56988595'
-            widget: string
-          - hint: 'Original text: Vitamina E, key: -42025ecc'
-            label: Text
-            name: '-42025ecc'
-            widget: string
-          - hint: 'Original text: Abacate, key: 1b355b8f'
-            label: Text
-            name: 1b355b8f
-            widget: string
-          - hint: 'Original text: 15mg, key: 171abe'
-            label: Text
-            name: 171abe
-            widget: string
-          - hint: 'Original text: Desenvolvido por Experts, key: -3506312e'
-            label: Text
-            name: '-3506312e'
+            name: 57fa6135
             widget: string
           - hint: >-
-              Original text: Texto que fala dos desenvolvedores dos produtos,
-              Texto que fala dos desenvolvedores dos produtosTexto que fala dos
-              desenvolvedores dos produtos, Texto que fala dos desenvolvedores
-              dos produtos, key: 663f77d8
+              Original text: A rich text element can be used with static or
+              dynamic content. For static content, just drop it into any page
+              and begin editing. For dynamic content, add a rich text field to
+              any collection and then connect a rich text element to that field
+              in the settings panel. Voila!, key: -a016b40
             label: Text
-            name: 663f77d8
+            name: '-a016b40'
             widget: text
           - hint: >-
-              Original text: Continuacao do texto que fala sobre os experts.,
-              key: bf0c0aa
+              Original text: How to customize formatting for each rich text,
+              key: -4bffb26e
             label: Text
-            name: bf0c0aa
+            name: '-4bffb26e'
             widget: string
           - hint: >-
-              Original text: Cuide muito bem do seu cérebro, que ele vai cuidar
-              de você (hoje e no futuro)., key: -176da096
+              Original text: Headings, paragraphs, blockquotes, figures, images,
+              and figure captions can all be styled after a class is added to
+              the rich text element using the "When inside of" nested selector
+              system., key: -43ba1153
             label: Text
-            name: '-176da096'
-            widget: string
-          - hint: >-
-              Original text: Energia aliada a concentração traz mais clareza
-              mental para você atingir seus objetivos e dormir com aquela
-              sensação de dever cumprido., key: -177c01a4
-            label: Text
-            name: '-177c01a4'
+            name: '-43ba1153'
             widget: text
+          - hint: 'Original text: Quantity, key: -48bd3755'
+            label: Text
+            name: '-48bd3755'
+            widget: string
+          - hint: 'Original text: Buy now, key: 71bb9a1c'
+            label: Text
+            name: 71bb9a1c
+            widget: string
+          - hint: 'Original text: This product is out of stock., key: 7aaa2dac'
+            label: Text
+            name: 7aaa2dac
+            widget: string
+          - hint: 'Original text: Our collections, key: -6fdf595f'
+            label: Text
+            name: '-6fdf595f'
+            widget: string
+          - hint: 'Original text: Login, key: 462ff49'
+            label: Text
+            name: 462ff49
+            widget: string
+          - hint: 'Original text: Email, key: 3ff5b7c'
+            label: Text
+            name: 3ff5b7c
+            widget: string
+          - hint: 'Original text: Reset password, key: 2822d26c'
+            label: Text
+            name: 2822d26c
+            widget: string
+          - hint: 'Original text: Password Reset Email Sent, key: 6bfe9c32'
+            label: Text
+            name: 6bfe9c32
+            widget: string
+          - hint: >-
+              Original text: If we found an account associated with that email
+              address, we've sent a link to reset your password., key: -13a89bf
+            label: Text
+            name: '-13a89bf'
+            widget: text
+          - hint: 'Original text: Reset Password, key: 2bfd368c'
+            label: Text
+            name: 2bfd368c
+            widget: string
+          - hint: >-
+              Original text: There was an error resetting your password. Please
+              try again, or contact us if you continue to have problems., key:
+              -7c28e64b
+            label: Text
+            name: '-7c28e64b'
+            widget: text
+          - hint: 'Original text: © 2023, E-coffee , key: 88ed582'
+            label: Text
+            name: 88ed582
+            widget: string
+          - hint: 'Original text: Search results, key: 7e85e19e'
+            label: Text
+            name: 7e85e19e
+            widget: string
+          - hint: 'Original text: Search, key: -6ca0ae38'
+            label: Text
+            name: '-6ca0ae38'
+            widget: string
+          - hint: 'Original text: No matching results., key: -75764c4'
+            label: Text
+            name: '-75764c4'
+            widget: string
+          - hint: 'Original text: No items found, key: -509a509d'
+            label: Text
+            name: '-509a509d'
+            widget: string
+          - hint: 'Original text: Account activated, key: -3d3c5c82'
+            label: Text
+            name: '-3d3c5c82'
+            widget: string
+          - hint: >-
+              Original text: Your account was created successfully. You will be
+              redirected shortly., key: -7498bb4e
+            label: Text
+            name: '-7498bb4e'
+            widget: string
+          - hint: 'Original text: If nothing happens, click here., key: -7bf1dbc9'
+            label: Text
+            name: '-7bf1dbc9'
+            widget: string
+          - hint: 'Original text: Name, key: 24eeab'
+            label: Text
+            name: 24eeab
+            widget: string
+          - hint: >-
+              Original text: By creating an account, I agree to this website's ,
+              key: 4867e34d
+            label: Text
+            name: 4867e34d
+            widget: string
+          - hint: 'Original text: privacy policy, key: 329660ca'
+            label: Text
+            name: 329660ca
+            widget: string
+          - hint: 'Original text:  and , key: 1f0b149'
+            label: Text
+            name: 1f0b149
+            widget: string
+          - hint: 'Original text: terms of service, key: 4f204da5'
+            label: Text
+            name: 4f204da5
+            widget: string
+          - hint: >-
+              Original text: I consent to receive marketing emails., key:
+              -3db302e8
+            label: Text
+            name: '-3db302e8'
+            widget: string
+          - hint: 'Original text: Already have an account? , key: -632223b5'
+            label: Text
+            name: '-632223b5'
+            widget: string
+          - hint: >-
+              Original text: There was an error signing you up. Please try
+              again, or contact us if you continue to have problems., key:
+              -191558ad
+            label: Text
+            name: '-191558ad'
+            widget: text
+          - hint: 'Original text: Verification Required, key: 8449804'
+            label: Text
+            name: '8449804'
+            widget: string
+          - hint: >-
+              Original text: Account verification required. Please check your
+              email to find your unique verification link., key: 66134559
+            label: Text
+            name: '66134559'
+            widget: text
+          - hint: 'Original text: Typography, key: 5500514f'
+            label: Text
+            name: 5500514f
+            widget: string
+          - hint: 'Original text: Headings, key: -3e9d592f'
+            label: Text
+            name: '-3e9d592f'
+            widget: string
+          - hint: 'Original text: All H1 Headings, key: -63ec17f7'
+            label: Text
+            name: '-63ec17f7'
+            widget: string
+          - hint: 'Original text: Heading H1, key: -cacf819'
+            label: Text
+            name: '-cacf819'
+            widget: string
+          - hint: >-
+              Original text: Font Size: 4rem - Line Height: 1.2 - Font Weight:
+              600, key: -1f2f02f7
+            label: Text
+            name: '-1f2f02f7'
+            widget: string
+          - hint: 'Original text: All H2 Headings, key: -6fa2a6d8'
+            label: Text
+            name: '-6fa2a6d8'
+            widget: string
+          - hint: 'Original text: Heading H2, key: -cacf818'
+            label: Text
+            name: '-cacf818'
+            widget: string
+          - hint: >-
+              Original text: Font Size: 3.5rem - Line Height: 1.2 - Font Weight:
+              600, key: -3d90ff3d
+            label: Text
+            name: '-3d90ff3d'
+            widget: string
+          - hint: 'Original text: All H3 Headings, key: -7b5935b9'
+            label: Text
+            name: '-7b5935b9'
+            widget: string
+          - hint: 'Original text: Heading H3, key: -cacf817'
+            label: Text
+            name: '-cacf817'
+            widget: string
+          - hint: >-
+              Original text: Font Size: 3rem - Line Height: 1.2 - Font Weight:
+              600, key: -26943816
+            label: Text
+            name: '-26943816'
+            widget: string
+          - hint: 'Original text: All H4 Headings, key: 78f03b66'
+            label: Text
+            name: 78f03b66
+            widget: string
+          - hint: 'Original text: Heading H4, key: -cacf816'
+            label: Text
+            name: '-cacf816'
+            widget: string
+          - hint: >-
+              Original text: Font Size: 2.5rem - Line Height: 1.2 - Font Weight:
+              600, key: -7d689c
+            label: Text
+            name: '-7d689c'
+            widget: string
+          - hint: 'Original text: All H5 Headings, key: 6d39ac85'
+            label: Text
+            name: 6d39ac85
+            widget: string
+          - hint: 'Original text: Heading H5, key: -cacf815'
+            label: Text
+            name: '-cacf815'
+            widget: string
+          - hint: >-
+              Original text: Font Size: 2rem - Line Height: 1.2 - Font Weight:
+              600, key: -2df96d35
+            label: Text
+            name: '-2df96d35'
+            widget: string
+          - hint: 'Original text: All H6 Headings, key: 61831da4'
+            label: Text
+            name: 61831da4
+            widget: string
+          - hint: 'Original text: Heading H6, key: -cacf814'
+            label: Text
+            name: '-cacf814'
+            widget: string
+          - hint: >-
+              Original text: Font Size: 1.5rem - Line Height: 1.2 - Font Weight:
+              600, key: 3c962e05
+            label: Text
+            name: 3c962e05
+            widget: string
+          - hint: 'Original text: h1, key: cc9'
+            label: Text
+            name: cc9
+            widget: string
+          - hint: 'Original text: Heading Text, key: 6ab6f0cb'
+            label: Text
+            name: 6ab6f0cb
+            widget: string
+          - hint: 'Original text: h2, key: cca'
+            label: Text
+            name: cca
+            widget: string
+          - hint: 'Original text: h3, key: ccb'
+            label: Text
+            name: ccb
+            widget: string
+          - hint: 'Original text: h4, key: ccc'
+            label: Text
+            name: ccc
+            widget: string
+          - hint: 'Original text: h5, key: ccd'
+            label: Text
+            name: ccd
+            widget: string
+          - hint: 'Original text: h6, key: cce'
+            label: Text
+            name: cce
+            widget: string
+          - hint: 'Original text: Body, key: 1fadc2'
+            label: Text
+            name: 1fadc2
+            widget: string
+          - hint: 'Original text: p-large, key: 77a3bb9e'
+            label: Text
+            name: 77a3bb9e
+            widget: string
+          - hint: >-
+              Original text: Font Size: 1.25rem - Line Height: 1.4 - Font
+              Weight: 400, key: -638417d7
+            label: Text
+            name: '-638417d7'
+            widget: string
+          - hint: 'Original text: p-medium, key: 7eba9b72'
+            label: Text
+            name: 7eba9b72
+            widget: string
+          - hint: >-
+              Original text: Font Size: 1.125rem - Line Height: 1.4 - Font
+              Weight: 400, key: 5d3006e2
+            label: Text
+            name: 5d3006e2
+            widget: string
+          - hint: 'Original text: p, key: 70'
+            label: Text
+            name: '70'
+            widget: string
+          - hint: >-
+              Original text: Font Size: 1rem - Line Height: 1.4 - Font Weight:
+              400, key: -661afd18
+            label: Text
+            name: '-661afd18'
+            widget: string
+          - hint: 'Original text: p-small, key: 780b956a'
+            label: Text
+            name: 780b956a
+            widget: string
+          - hint: >-
+              Original text: Font Size: 0.875rem - Line Height: 1.4 - Font
+              Weight: 400, key: 727684a1
+            label: Text
+            name: 727684a1
+            widget: string
+          - hint: 'Original text: p-extra-small, key: -3bf524d3'
+            label: Text
+            name: '-3bf524d3'
+            widget: string
+          - hint: >-
+              Original text: Font Size: 0.75rem - Line Height: 1.4 - Font
+              Weight: 400, key: 7c224f6d
+            label: Text
+            name: 7c224f6d
+            widget: string
+          - hint: 'Original text: Spacing, key: -14b683dd'
+            label: Text
+            name: '-14b683dd'
+            widget: string
+          - hint: 'Original text: Margins, key: -6ac3379b'
+            label: Text
+            name: '-6ac3379b'
+            widget: string
+          - hint: 'Original text: All directions, key: -1e800b2d'
+            label: Text
+            name: '-1e800b2d'
+            widget: string
+          - hint: 'Original text: m-0, key: 19ed0'
+            label: Text
+            name: 19ed0
+            widget: string
+          - hint: 'Original text: All margins 0, key: -1665e08a'
+            label: Text
+            name: '-1665e08a'
+            widget: string
+          - hint: 'Original text: m-1, key: 19ed1'
+            label: Text
+            name: 19ed1
+            widget: string
+          - hint: 'Original text: All margins 1rem, key: -798aae3d'
+            label: Text
+            name: '-798aae3d'
+            widget: string
+          - hint: 'Original text: m-2, key: 19ed2'
+            label: Text
+            name: 19ed2
+            widget: string
+          - hint: 'Original text: m-4, key: 19ed4'
+            label: Text
+            name: 19ed4
+            widget: string
+          - hint: 'Original text: Horizontal, key: -367897bc'
+            label: Text
+            name: '-367897bc'
+            widget: string
+          - hint: 'Original text: mx-0, key: 33548e'
+            label: Text
+            name: 33548e
+            widget: string
+          - hint: 'Original text: All horizontal margins 0, key: 1e235398'
+            label: Text
+            name: '1e235398'
+            widget: string
+          - hint: 'Original text: mx-1, key: 33548f'
+            label: Text
+            name: 33548f
+            widget: string
+          - hint: 'Original text: All horizontal margins 1rem, key: 30ff1261'
+            label: Text
+            name: 30ff1261
+            widget: string
+          - hint: 'Original text: mx-2, key: 335490'
+            label: Text
+            name: '335490'
+            widget: string
+          - hint: 'Original text: mx-4, key: 335492'
+            label: Text
+            name: '335492'
+            widget: string
+          - hint: 'Original text: Vertical, key: -7269346a'
+            label: Text
+            name: '-7269346a'
+            widget: string
+          - hint: 'Original text: my-0, key: 33584f'
+            label: Text
+            name: 33584f
+            widget: string
+          - hint: 'Original text: All vertical margins 0, key: 6508f42a'
+            label: Text
+            name: 6508f42a
+            widget: string
+          - hint: 'Original text: my-1, key: 335850'
+            label: Text
+            name: '335850'
+            widget: string
+          - hint: 'Original text: All vertical margins 1rem, key: -73082f71'
+            label: Text
+            name: '-73082f71'
+            widget: string
+          - hint: 'Original text: my-2, key: 335851'
+            label: Text
+            name: '335851'
+            widget: string
+          - hint: 'Original text: my-4, key: 335853'
+            label: Text
+            name: '335853'
+            widget: string
+          - hint: 'Original text: Top, key: 14935'
+            label: Text
+            name: '14935'
+            widget: string
+          - hint: 'Original text: mt-0, key: 33458a'
+            label: Text
+            name: 33458a
+            widget: string
+          - hint: 'Original text: Top margin 0, key: -735b0737'
+            label: Text
+            name: '-735b0737'
+            widget: string
+          - hint: 'Original text: mt-1, key: 33458b'
+            label: Text
+            name: 33458b
+            widget: string
+          - hint: 'Original text: Top margin 1rem, key: -e0a6c70'
+            label: Text
+            name: '-e0a6c70'
+            widget: string
+          - hint: 'Original text: mt-2, key: 33458c'
+            label: Text
+            name: 33458c
+            widget: string
+          - hint: 'Original text: mt-4, key: 33458e'
+            label: Text
+            name: 33458e
+            widget: string
+          - hint: 'Original text: Bottom, key: 76f2864b'
+            label: Text
+            name: 76f2864b
+            widget: string
+          - hint: 'Original text: mb-0, key: 3301f8'
+            label: Text
+            name: 3301f8
+            widget: string
+          - hint: 'Original text: Bottom margin 0, key: -2ce7eb8d'
+            label: Text
+            name: '-2ce7eb8d'
+            widget: string
+          - hint: 'Original text: mb-1, key: 3301f9'
+            label: Text
+            name: 3301f9
+            widget: string
+          - hint: 'Original text: Bottom margin 1rem, key: 3f35dfa6'
+            label: Text
+            name: 3f35dfa6
+            widget: string
+          - hint: 'Original text: mb-2, key: 3301fa'
+            label: Text
+            name: 3301fa
+            widget: string
+          - hint: 'Original text: Bottom margin 2rem, key: 3f365405'
+            label: Text
+            name: 3f365405
+            widget: string
+          - hint: 'Original text: mb-4, key: 3301fc'
+            label: Text
+            name: 3301fc
+            widget: string
+          - hint: 'Original text: Bottom margin 4rem, key: 3f373cc3'
+            label: Text
+            name: 3f373cc3
+            widget: string
+          - hint: 'Original text: Left, key: 241427'
+            label: Text
+            name: '241427'
+            widget: string
+          - hint: 'Original text: ml-0, key: 332782'
+            label: Text
+            name: '332782'
+            widget: string
+          - hint: 'Original text: Left margin 0, key: 73725e17'
+            label: Text
+            name: '73725e17'
+            widget: string
+          - hint: 'Original text: ml-1, key: 332783'
+            label: Text
+            name: '332783'
+            widget: string
+          - hint: 'Original text: Left margin 1rem, key: -55ea7c7e'
+            label: Text
+            name: '-55ea7c7e'
+            widget: string
+          - hint: 'Original text: ml-2, key: 332784'
+            label: Text
+            name: '332784'
+            widget: string
+          - hint: 'Original text: ml-4, key: 332786'
+            label: Text
+            name: '332786'
+            widget: string
+          - hint: 'Original text: Right, key: 4b4d1fc'
+            label: Text
+            name: 4b4d1fc
+            widget: string
+          - hint: 'Original text: mr-0, key: 333e08'
+            label: Text
+            name: '333e08'
+            widget: string
+          - hint: 'Original text: Right margin 0, key: a815fe2'
+            label: Text
+            name: a815fe2
+            widget: string
+          - hint: 'Original text: mr-1, key: 333e09'
+            label: Text
+            name: '333e09'
+            widget: string
+          - hint: 'Original text: Right margin 1rem, key: -7a88d629'
+            label: Text
+            name: '-7a88d629'
+            widget: string
+          - hint: 'Original text: mr-2, key: 333e0a'
+            label: Text
+            name: 333e0a
+            widget: string
+          - hint: 'Original text: mr-4, key: 333e0c'
+            label: Text
+            name: 333e0c
+            widget: string
+          - hint: 'Original text: Paddings, key: 31f1aaa2'
+            label: Text
+            name: 31f1aaa2
+            widget: string
+          - hint: 'Original text: p-0, key: 1aa13'
+            label: Text
+            name: 1aa13
+            widget: string
+          - hint: 'Original text: All paddings 0, key: -268141ef'
+            label: Text
+            name: '-268141ef'
+            widget: string
+          - hint: 'Original text: p-1, key: 1aa14'
+            label: Text
+            name: 1aa14
+            widget: string
+          - hint: 'Original text: All paddings 1rem, key: 242a6948'
+            label: Text
+            name: 242a6948
+            widget: string
+          - hint: 'Original text: p-2, key: 1aa15'
+            label: Text
+            name: 1aa15
+            widget: string
+          - hint: 'Original text: p-4, key: 1aa17'
+            label: Text
+            name: 1aa17
+            widget: string
+          - hint: 'Original text: px-0, key: 34b1ab'
+            label: Text
+            name: 34b1ab
+            widget: string
+          - hint: 'Original text: All horizontal paddings 0, key: 361c0e2f'
+            label: Text
+            name: 361c0e2f
+            widget: string
+          - hint: 'Original text: px-1, key: 34b1ac'
+            label: Text
+            name: 34b1ac
+            widget: string
+          - hint: 'Original text: All horizontal paddings 1rem, key: -35274396'
+            label: Text
+            name: '-35274396'
+            widget: string
+          - hint: 'Original text: px-2, key: 34b1ad'
+            label: Text
+            name: 34b1ad
+            widget: string
+          - hint: 'Original text: px-4, key: 34b1af'
+            label: Text
+            name: 34b1af
+            widget: string
+          - hint: 'Original text: py-0, key: 34b56c'
+            label: Text
+            name: 34b56c
+            widget: string
+          - hint: 'Original text: All vertical paddings 0, key: -34158023'
+            label: Text
+            name: '-34158023'
+            widget: string
+          - hint: 'Original text: py-1, key: 34b56d'
+            label: Text
+            name: 34b56d
+            widget: string
+          - hint: 'Original text: All vertical paddings 1rem, key: -12083c04'
+            label: Text
+            name: '-12083c04'
+            widget: string
+          - hint: 'Original text: py-2, key: 34b56e'
+            label: Text
+            name: 34b56e
+            widget: string
+          - hint: 'Original text: py-4, key: 34b570'
+            label: Text
+            name: 34b570
+            widget: string
+          - hint: 'Original text: Overflow, key: 236c1822'
+            label: Text
+            name: 236c1822
+            widget: string
+          - hint: 'Original text: overflow-hidden, key: -6d7ad22b'
+            label: Text
+            name: '-6d7ad22b'
+            widget: string
+          - hint: 'Original text: overflow: hidden, key: 2260c252'
+            label: Text
+            name: 2260c252
+            widget: string
+          - hint: 'Original text: overflow-visible, key: -5c729a59'
+            label: Text
+            name: '-5c729a59'
+            widget: string
+          - hint: 'Original text: overflow: visible, key: f2460ca'
+            label: Text
+            name: f2460ca
+            widget: string
+          - hint: 'Original text: Display + Position, key: -64f9d424'
+            label: Text
+            name: '-64f9d424'
+            widget: string
+          - hint: 'Original text: display-none, key: 5d83e163'
+            label: Text
+            name: 5d83e163
+            widget: string
+          - hint: 'Original text: display: none, key: 64dbb2a0'
+            label: Text
+            name: 64dbb2a0
+            widget: string
+          - hint: 'Original text: display-block, key: 524dd7c2'
+            label: Text
+            name: 524dd7c2
+            widget: string
+          - hint: 'Original text: display: block, key: 35f02e25'
+            label: Text
+            name: 35f02e25
+            widget: string
+          - hint: 'Original text: flex, key: 2ffff9'
+            label: Text
+            name: 2ffff9
+            widget: string
+          - hint: 'Original text: display: flex, key: 64d80361'
+            label: Text
+            name: 64d80361
+            widget: string
+          - hint: 'Original text: position-relative, key: -34f7dd10'
+            label: Text
+            name: '-34f7dd10'
+            widget: string
+          - hint: 'Original text: position: relative, key: 65ad75db'
+            label: Text
+            name: 65ad75db
+            widget: string
+          - hint: 'Original text: Columns, key: -642bd043'
+            label: Text
+            name: '-642bd043'
+            widget: string
+          - hint: 'Original text: col, key: 18180'
+            label: Text
+            name: '18180'
+            widget: string
+          - hint: 'Original text: cols-12, key: 3899b73b'
+            label: Text
+            name: 3899b73b
+            widget: string
+          - hint: 'Original text: cols-11, key: 3899b73a'
+            label: Text
+            name: 3899b73a
+            widget: string
+          - hint: 'Original text: cols-10, key: 3899b739'
+            label: Text
+            name: 3899b739
+            widget: string
+          - hint: 'Original text: cols-9, key: -50c13c21'
+            label: Text
+            name: '-50c13c21'
+            widget: string
+          - hint: 'Original text: cols-8, key: -50c13c22'
+            label: Text
+            name: '-50c13c22'
+            widget: string
+          - hint: 'Original text: cols-7, key: -50c13c23'
+            label: Text
+            name: '-50c13c23'
+            widget: string
+          - hint: 'Original text: cols-6, key: -50c13c24'
+            label: Text
+            name: '-50c13c24'
+            widget: string
+          - hint: 'Original text: cols-5, key: -50c13c25'
+            label: Text
+            name: '-50c13c25'
+            widget: string
+          - hint: 'Original text: cols-4, key: -50c13c26'
+            label: Text
+            name: '-50c13c26'
+            widget: string
+          - hint: 'Original text: cols-3, key: -50c13c27'
+            label: Text
+            name: '-50c13c27'
+            widget: string
+          - hint: 'Original text: cols-2, key: -50c13c28'
+            label: Text
+            name: '-50c13c28'
+            widget: string
+          - hint: 'Original text: cols-1, key: -50c13c29'
+            label: Text
+            name: '-50c13c29'
+            widget: string
+          - hint: 'Original text: Components, key: 5c265f36'
+            label: Text
+            name: 5c265f36
+            widget: string
+          - hint: 'Original text: Buttons, key: 719b5761'
+            label: Text
+            name: 719b5761
+            widget: string
+          - hint: 'Original text: btn, key: 17e5c'
+            label: Text
+            name: 17e5c
+            widget: string
+          - hint: 'Original text: Button, key: 77471352'
+            label: Text
+            name: '77471352'
+            widget: string
+          - hint: 'Original text: secondary, key: -30bb8e8c'
+            label: Text
+            name: '-30bb8e8c'
+            widget: string
+          - hint: 'Original text: link, key: 32affa'
+            label: Text
+            name: 32affa
+            widget: string
+          - hint: 'Original text: btn-stretched, key: -5bf39bcd'
+            label: Text
+            name: '-5bf39bcd'
+            widget: string
+          - hint: 'Original text: Password updated, key: -16704faa'
+            label: Text
+            name: '-16704faa'
+            widget: string
+          - hint: >-
+              Original text: Your password was updated successfully. You were
+              automatically logged in and can continue your session., key:
+              5284c470
+            label: Text
+            name: 5284c470
+            widget: text
+          - hint: 'Original text: Go to Homepage, key: -27857705'
+            label: Text
+            name: '-27857705'
+            widget: string
+          - hint: 'Original text: Update Password, key: 69ed5012'
+            label: Text
+            name: 69ed5012
+            widget: string
+          - hint: >-
+              Original text: Please enter your new password in the field below.
+              Make sure you are not using your current password., key: -2d35ed29
+            label: Text
+            name: '-2d35ed29'
+            widget: text
+          - hint: 'Original text: New Password, key: 79707d5b'
+            label: Text
+            name: 79707d5b
+            widget: string
+          - hint: >-
+              Original text: There was an error updating your password. Please
+              try again, or contact us if you continue to have problems., key:
+              -2da7dae4
+            label: Text
+            name: '-2da7dae4'
+            widget: text
+          - hint: 'Original text: Account, key: 1d0c220d'
+            label: Text
+            name: 1d0c220d
+            widget: string
+          - hint: 'Original text: Logout, key: -7802fe56'
+            label: Text
+            name: '-7802fe56'
+            widget: string
+          - hint: 'Original text: Orders, key: -72bbb0fb'
+            label: Text
+            name: '-72bbb0fb'
+            widget: string
+          - hint: 'Original text: Order N., key: 4d6b73d2'
+            label: Text
+            name: 4d6b73d2
+            widget: string
+          - hint: 'Original text: Made on, key: -6b8a7b56'
+            label: Text
+            name: '-6b8a7b56'
+            widget: string
+          - hint: 'Original text: Total, key: 4d3eb24'
+            label: Text
+            name: 4d3eb24
+            widget: string
+          - hint: 'Original text: Status, key: -6bcd43ee'
+            label: Text
+            name: '-6bcd43ee'
+            widget: string
+          - hint: 'Original text: #33, key: 89c3'
+            label: Text
+            name: 89c3
+            widget: string
+          - hint: 'Original text: 23 January 2021, key: 766ec692'
+            label: Text
+            name: 766ec692
+            widget: string
+          - hint: 'Original text: 330$, key: 17f454'
+            label: Text
+            name: 17f454
+            widget: string
+          - hint: 'Original text: Fulfilled, key: 9c988ff'
+            label: Text
+            name: 9c988ff
+            widget: string
+          - hint: 'Original text: Addresses, key: -546d647e'
+            label: Text
+            name: '-546d647e'
+            widget: string
+          - hint: 'Original text: Edit, key: 20e22a'
+            label: Text
+            name: 20e22a
+            widget: string
+          - hint: 'Original text: HYPERX NGENUITY, key: 675a014f'
+            label: Text
+            name: 675a014f
+            widget: string
+          - hint: >-
+              Original text: HyperX NGENUITY is a powerful and intuitive
+              software that will allow you to personalize your compatible HyperX
+              products. Set button bindings, program and store macros, and
+              customize lighting; HyperX NGENUITY gives you as much control as
+              you want. The software also comes with a library of presets, so
+              you can quickly choose one to install and jump straight into the
+              action., key: 1bf2de96
+            label: Text
+            name: 1bf2de96
+            widget: text
+          - hint: 'Original text: DOWNLOAD FOR WINDOWS, key: -354405ac'
+            label: Text
+            name: '-354405ac'
+            widget: string
+          - hint: >-
+              Original text: Powerful customization at your fingertips, key:
+              631c9856
+            label: Text
+            name: 631c9856
+            widget: string
+          - hint: 'Original text: Easily set up lighting and effects., key: 1618c1c3'
+            label: Text
+            name: 1618c1c3
+            widget: string
+          - hint: 'Original text: Advanced DPI Customization, key: -4ffb164e'
+            label: Text
+            name: '-4ffb164e'
+            widget: string
+          - hint: >-
+              Original text: Tailor your mouse control to be exactly as precise
+              as you need., key: -14b6cee
+            label: Text
+            name: '-14b6cee'
+            widget: string
+          - hint: 'Original text: Personalized Game Mode, key: -7595031f'
+            label: Text
+            name: '-7595031f'
+            widget: string
+          - hint: >-
+              Original text: Choose which keys get disabled with the Game Mode
+              button., key: 7cf1393e
+            label: Text
+            name: 7cf1393e
+            widget: string
+          - hint: >-
+              Original text: Create and store macros and button bindings, key:
+              -bc7d7ba
+            label: Text
+            name: '-bc7d7ba'
+            widget: string
+          - hint: >-
+              Original text: Make one keypress do the work of many and set
+              buttons for each of your desired actions., key: 7b23eb2a
+            label: Text
+            name: 7b23eb2a
+            widget: string
+          - hint: 'Original text: Compatible Devices, key: -1eec9c6f'
+            label: Text
+            name: '-1eec9c6f'
+            widget: string
+          - hint: >-
+              Original text: Wake up to the smell of freshly brewed coffee, key:
+              -57dbe923
+            label: Text
+            name: '-57dbe923'
+            widget: string
+          - hint: 'Original text: Free shipping, key: 2dec50c2'
+            label: Text
+            name: 2dec50c2
+            widget: string
+          - hint: 'Original text: Wide selection of products, key: -6dd72074'
+            label: Text
+            name: '-6dd72074'
+            widget: string
+          - hint: 'Original text: Money-back guarantee, key: 158b5b5c'
+            label: Text
+            name: 158b5b5c
+            widget: string
+          - hint: 'Original text: california, key: -1fddf948'
+            label: Text
+            name: '-1fddf948'
+            widget: string
+          - hint: 'Original text: Yosemite, key: -28e3faeb'
+            label: Text
+            name: '-28e3faeb'
+            widget: string
+          - hint: 'Original text: wyoming・montana・idaho, key: 6fa6da05'
+            label: Text
+            name: 6fa6da05
+            widget: string
+          - hint: 'Original text: Yellowstone, key: 45c8e451'
+            label: Text
+            name: 45c8e451
+            widget: string
+          - hint: 'Original text: utah, key: 36ef06'
+            label: Text
+            name: 36ef06
+            widget: string
+          - hint: 'Original text: Bryce Canyon, key: 274f2bfd'
+            label: Text
+            name: 274f2bfd
+            widget: string
+          - hint: 'Original text: washington, key: -62d39a70'
+            label: Text
+            name: '-62d39a70'
+            widget: string
+          - hint: 'Original text: Mount Rainier, key: -2013d685'
+            label: Text
+            name: '-2013d685'
+            widget: string
+          - hint: 'Original text: california・nevada, key: -2f28c65e'
+            label: Text
+            name: '-2f28c65e'
+            widget: string
+          - hint: 'Original text: Death Valley, key: -f335935'
+            label: Text
+            name: '-f335935'
+            widget: string
+          - hint: 'Original text: Olympic, key: 12340619'
+            label: Text
+            name: '12340619'
+            widget: string
+          - hint: 'Original text: montana, key: 49b575ec'
+            label: Text
+            name: 49b575ec
+            widget: string
+          - hint: 'Original text: Glacier, key: 69ab518f'
+            label: Text
+            name: 69ab518f
+            widget: string
+          - hint: 'Original text: arizona, key: -2c3a4e00'
+            label: Text
+            name: '-2c3a4e00'
+            widget: string
+          - hint: 'Original text: Grand Canyon, key: 5df4641c'
+            label: Text
+            name: 5df4641c
+            widget: string
+          - hint: 'Original text: Shipping Information, key: -11603a46'
+            label: Text
+            name: '-11603a46'
+            widget: string
+          - hint: 'Original text: Heading 1, key: 6af22973'
+            label: Text
+            name: 6af22973
+            widget: string
+          - hint: 'Original text: Heading 2, key: 6af22974'
+            label: Text
+            name: 6af22974
+            widget: string
+          - hint: 'Original text: Heading 3, key: 6af22975'
+            label: Text
+            name: 6af22975
+            widget: string
+          - hint: 'Original text: Heading 4, key: 6af22976'
+            label: Text
+            name: 6af22976
+            widget: string
+          - hint: 'Original text: Heading 5, key: 6af22977'
+            label: Text
+            name: 6af22977
+            widget: string
+          - hint: 'Original text: Heading 6, key: 6af22978'
+            label: Text
+            name: 6af22978
+            widget: string
+          - hint: >-
+              Original text: Lorem ipsum dolor sit amet, consectetur adipiscing
+              elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+              aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+              laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+              dolor in reprehenderit in voluptate velit esse cillum dolore eu
+              fugiat nulla pariatur., key: 36f186d6
+            label: Text
+            name: 36f186d6
+            widget: text
+          - hint: 'Original text: Block quote, key: 40f76109'
+            label: Text
+            name: 40f76109
+            widget: string
+          - hint: 'Original text: Ordered list, key: 670f3891'
+            label: Text
+            name: 670f3891
+            widget: string
+          - hint: 'Original text: Item 1, key: -7cdc0d7c'
+            label: Text
+            name: '-7cdc0d7c'
+            widget: string
+          - hint: 'Original text: Item 2, key: -7cdc0d7b'
+            label: Text
+            name: '-7cdc0d7b'
+            widget: string
+          - hint: 'Original text: Item 3, key: -7cdc0d7a'
+            label: Text
+            name: '-7cdc0d7a'
+            widget: string
+          - hint: 'Original text: Unordered list, key: -27cb5e56'
+            label: Text
+            name: '-27cb5e56'
+            widget: string
+          - hint: 'Original text: Item A, key: -7cdc0d6c'
+            label: Text
+            name: '-7cdc0d6c'
+            widget: string
+          - hint: 'Original text: Item B, key: -7cdc0d6b'
+            label: Text
+            name: '-7cdc0d6b'
+            widget: string
+          - hint: 'Original text: Item C, key: -7cdc0d6a'
+            label: Text
+            name: '-7cdc0d6a'
+            widget: string
+          - hint: 'Original text: Text link, key: 361eaeed'
+            label: Text
+            name: 361eaeed
+            widget: string
+          - hint: 'Original text: Bold text, key: 4205e5c8'
+            label: Text
+            name: 4205e5c8
+            widget: string
+          - hint: 'Original text: Emphasis, key: 4abe799c'
+            label: Text
+            name: 4abe799c
+            widget: string
+          - hint: 'Original text: Superscript, key: 1dea1fe6'
+            label: Text
+            name: 1dea1fe6
+            widget: string
+          - hint: 'Original text: Subscript, key: -69de0115'
+            label: Text
+            name: '-69de0115'
+            widget: string
       - label: Links
         name: links
         file: cms/_data/links.json
@@ -1069,25 +2304,17 @@ collections:
             label: Link
             name: '23'
             widget: string
-          - hint: 'Original link: /produtos/health/, key: 61391f0d'
+          - hint: 'Original link: /, key: 2f'
             label: Link
-            name: 61391f0d
+            name: 2f
             widget: string
-          - hint: 'Original link: /produtos/recovery/, key: 3120c274'
+          - hint: 'Original link: /sign-up/, key: 4b0d5213'
             label: Link
-            name: 3120c274
+            name: 4b0d5213
             widget: string
-          - hint: 'Original link: /produtos/booster/, key: 7fe88025'
+          - hint: 'Original link: /#/checkout, key: 5032f721'
             label: Link
-            name: 7fe88025
-            widget: string
-          - hint: 'Original link: /collections/bundles, key: -3a8bc6d8'
-            label: Link
-            name: '-3a8bc6d8'
-            widget: string
-          - hint: 'Original link: /collections/accessories, key: -1e0e5759'
-            label: Link
-            name: '-1e0e5759'
+            name: 5032f721
             widget: string
           - hint: >-
               Original link:
@@ -1096,35 +2323,72 @@ collections:
             label: Link
             name: '-1e78a519'
             widget: string
-          - hint: >-
-              Original link:
-              mailto:atendimento@num.health?subject=Atendimento%20NUM, key:
-              6e164e7f
+          - hint: 'Original link: https://www.instagram.com/hyperx/, key: -21a165ad'
             label: Link
-            name: 6e164e7f
+            name: '-21a165ad'
             widget: string
           - hint: >-
+              Original link: https://www.facebook.com/hyperxcommunity, key:
+              -30793a13
+            label: Link
+            name: '-30793a13'
+            widget: string
+          - hint: 'Original link: https://x.com/hyperx, key: 614cfb5f'
+            label: Link
+            name: 614cfb5f
+            widget: string
+          - hint: >-
+              Original link: https://discord.com/invite/hyperxgaming, key:
+              15ae5702
+            label: Link
+            name: 15ae5702
+            widget: string
+          - hint: >-
+              Original link: https://www.tiktok.com/@hyperx?lang=en, key:
+              548ae569
+            label: Link
+            name: 548ae569
+            widget: string
+          - hint: 'Original link: https://www.youtube.com/c/hyperx, key: 42d5ae37'
+            label: Link
+            name: 42d5ae37
+            widget: string
+          - hint: >-
               Original link:
-              https://api.whatsapp.com/send?phone=5527998880373&text=Ol%C3%A1%2C%20tenho%20uma%20d%C3%BAvida%20sobre%20o%20Suplemento%20Alimentar%20Cerebral%20da%20N%C3%9CM,
-              key: 63034569
+              https://www.hp.com/us-en/privacy/privacy-central.html, key:
+              -6384bcb
             label: Link
-            name: '63034569'
+            name: '-6384bcb'
             widget: string
-          - hint: 'Original link: /offer/build-your-bundle, key: c04f87b'
+          - hint: 'Original link: /log-in/, key: 26a3aa92'
             label: Link
-            name: c04f87b
+            name: 26a3aa92
             widget: string
-          - hint: 'Original link: /collections/concentrates, key: eb34912'
+          - hint: 'Original link: /checkout/, key: -eb5dfa6'
             label: Link
-            name: eb34912
+            name: '-eb5dfa6'
             widget: string
-          - hint: 'Original link: /recipes-categories/iced, key: 39996515'
+          - hint: 'Original link: /reset-password/, key: -16d8c219'
             label: Link
-            name: '39996515'
+            name: '-16d8c219'
             widget: string
-          - hint: 'Original link: https://help.javycoffee.com/, key: 6048cdd8'
+          - hint: 'Original link: /addresses/, key: -5a1435c4'
             label: Link
-            name: 6048cdd8
+            name: '-5a1435c4'
+            widget: string
+          - hint: >-
+              Original link:
+              https://apps.microsoft.com/detail/9p1tbxr6qdcx?hl=en-US&gl=US,
+              key: -56e35167
+            label: Link
+            name: '-56e35167'
+            widget: string
+          - hint: >-
+              Original link:
+              https://university.webflow.com/lesson/add-and-nest-text-links-in-webflow,
+              key: -1a691619
+            label: Link
+            name: '-1a691619'
             widget: string
       - label: Images
         name: images
@@ -1135,7 +2399,7 @@ collections:
             widget: hidden
             default: Images
           - label: Image
-            name: i17828865
+            name: 4c4c46d2
             widget: object
             fields:
               - name: url
@@ -1148,7 +2412,7 @@ collections:
                 widget: string
                 required: false
           - label: Image
-            name: i46796a01
+            name: 7763f2ad
             widget: object
             fields:
               - name: url
@@ -1161,33 +2425,7 @@ collections:
                 widget: string
                 required: false
           - label: Image
-            name: '-67388639'
-            widget: object
-            fields:
-              - name: url
-                label: Image Url
-                widget: image
-                allow_multiple: false
-                required: false
-              - name: alt
-                label: Image Alt
-                widget: string
-                required: false
-          - label: Image
-            name: 4cfbc7db
-            widget: object
-            fields:
-              - name: url
-                label: Image Url
-                widget: image
-                allow_multiple: false
-                required: false
-              - name: alt
-                label: Image Alt
-                widget: string
-                required: false
-          - label: Image
-            name: 127013d5
+            name: '-63dbc2f3'
             widget: object
             fields:
               - name: url
@@ -1213,7 +2451,7 @@ collections:
                 widget: string
                 required: false
           - label: Image
-            name: '-7a700be7'
+            name: '-28e5c1ad'
             widget: object
             fields:
               - name: url
@@ -1226,7 +2464,7 @@ collections:
                 widget: string
                 required: false
           - label: Image
-            name: '-43359aff'
+            name: '-77ab919a'
             widget: object
             fields:
               - name: url
@@ -1239,7 +2477,7 @@ collections:
                 widget: string
                 required: false
           - label: Image
-            name: 3c31f3e
+            name: '-65532cf2'
             widget: object
             fields:
               - name: url
@@ -1252,7 +2490,7 @@ collections:
                 widget: string
                 required: false
           - label: Image
-            name: '-371fbec7'
+            name: '-1583e1f9'
             widget: object
             fields:
               - name: url
@@ -1265,7 +2503,7 @@ collections:
                 widget: string
                 required: false
           - label: Image
-            name: 4750aeaa
+            name: '-7040ea2e'
             widget: object
             fields:
               - name: url
@@ -1278,7 +2516,7 @@ collections:
                 widget: string
                 required: false
           - label: Image
-            name: 23fd60c
+            name: '-2bfdb0'
             widget: object
             fields:
               - name: url
@@ -1291,7 +2529,7 @@ collections:
                 widget: string
                 required: false
           - label: Image
-            name: '-35c7a6e8'
+            name: 52e5158c
             widget: object
             fields:
               - name: url
@@ -1304,7 +2542,7 @@ collections:
                 widget: string
                 required: false
           - label: Image
-            name: '-4e3fc172'
+            name: '-47262dbb'
             widget: object
             fields:
               - name: url
@@ -1317,7 +2555,7 @@ collections:
                 widget: string
                 required: false
           - label: Image
-            name: 30c16e18
+            name: ac78ada
             widget: object
             fields:
               - name: url
@@ -1330,7 +2568,7 @@ collections:
                 widget: string
                 required: false
           - label: Image
-            name: 8d641c1
+            name: 53a328e2
             widget: object
             fields:
               - name: url
@@ -1343,7 +2581,7 @@ collections:
                 widget: string
                 required: false
           - label: Image
-            name: '-5f676121'
+            name: '-c5002ac'
             widget: object
             fields:
               - name: url
@@ -1356,7 +2594,332 @@ collections:
                 widget: string
                 required: false
           - label: Image
-            name: cfc995c
+            name: '5e306290'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-719ccd6b'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-2a493f32'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 2c2983c4
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-92b24bb'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-2b1beb3c'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 4abef31c
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 317f733b
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-20982256'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 24155fd4
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-2fc4b48f'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-75846fcd'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 145d72ee
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 2a813acf
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-2cf474cf'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 774a1e92
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: aa1f0c6
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '242275e7'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-2d23035d'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '65601e35'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: cde5a8e
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-7b6f4a7c'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-3021253a'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-5dd05686'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-1ef4124b'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-4506c91d'
             widget: object
             fields:
               - name: url
